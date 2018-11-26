@@ -14,13 +14,13 @@
 #include <stdio.h>
 #include <GL/glut.h>
 #include <GL/gl.h>
-GLint winWidth = 640, winHeight = 480;
+GLint winWidth = 1200, winHeight = 750;
 
 
 
 void init(void) {
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
-	glutInitWindowPosition(100, 100);
+	glutInitWindowPosition(150, 20);
 	glutInitWindowSize(winWidth, winHeight);
 	glutCreateWindow("Solar System Simulator");
 	glClearColor(0.0, 0.0, 0.0, 1.0);
@@ -31,8 +31,10 @@ void winReshapeFcn(GLint newWidth, GLint newHeight) {
 	glViewport(0, 0, newWidth, newHeight);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
+	gluOrtho2D(0.0, GLdouble(newWidth), GLdouble(newHeight), 0.0);
 	winWidth = newWidth;
 	winHeight = newHeight;
+	glFlush();
 }
 
 void mouseDraw(GLint button, GLint action, GLint xMouse, GLint yMouse) {
