@@ -14,16 +14,16 @@
 #include <stdio.h>
 #include <GL/glut.h>
 #include <GL/gl.h>
-GLint winWidth = 640, winHeight = 480;
+GLint winWidth = 1000, winHeight = 600;
 
 
 
 void init(void) {
-	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
-	glutInitWindowPosition(100, 100);
-	glutInitWindowSize(winWidth, winHeight);
-	glutCreateWindow("Solar System Simulator");
-	glClearColor(0.0, 0.0, 0.0, 1.0);
+    glClearColor(1.0, 1.0, 1.0, 0.0); // Set display-window color to white
+    glMatrixMode(GL_PROJECTION);
+    gluOrtho2D(0.0, winWidth, winHeight, 0.0);
+    glColor3f(1.0, 0.0, 0.0);
+    glFlush();
 }
 
 
@@ -51,13 +51,16 @@ int main(int argc, char** argv) {
 
 	glutInit(&argc, argv);
 
-
+	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+	glutInitWindowPosition(100, 100);
+	glutInitWindowSize(winWidth, winHeight);
+	glutCreateWindow("Solar System Simulator");
 	init();
 
 	glutReshapeFunc(winReshapeFcn);
-	glutMouseFunc(mouseDraw);
-	glutMotionFunc(mouseMotion);
-	glutAttachMenu(GLUT_RIGHT_BUTTON);//add right click menu
+	//glutMouseFunc(mouseDraw);
+	//glutMotionFunc(mouseMotion);
+	//glutAttachMenu(GLUT_RIGHT_BUTTON);//add right click menu
 	glutMainLoop();
 
 	return 0;
