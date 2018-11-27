@@ -22,11 +22,13 @@ GLint winWidth = 1200, winHeight = 750;
 
 
 void init(void) {
+	glClearColor(0.0, 0.0, 0.0, 1.0);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
 	glutInitWindowPosition(150, 20);
 	glutInitWindowSize(winWidth, winHeight);
 	glutCreateWindow("Solar System Simulator");
-	glClearColor(0.0, 0.0, 0.0, 1.0);
+	glutSwapBuffers();
+
 }
 
 
@@ -40,11 +42,11 @@ void winReshapeFcn(GLint newWidth, GLint newHeight) {
 	glFlush();
 }
 
-void mouseDraw(GLint button, GLint action, GLint xMouse, GLint yMouse) {
+void mouseAction(GLint button, GLint action, GLint x, GLint y) {
 
 }
 
-void mouseMotion(GLint xMouse, GLint yMouse) {
+void mouseMotion(GLint x, GLint y) {
 
 }
 
@@ -60,7 +62,7 @@ int main(int argc, char** argv) {
 	init();
 
 	glutReshapeFunc(winReshapeFcn);
-	glutMouseFunc(mouseDraw);
+	glutMouseFunc(mouseAction);
 	glutMotionFunc(mouseMotion);
 	glutAttachMenu(GLUT_RIGHT_BUTTON);//add right click menu
 	glutMainLoop();
