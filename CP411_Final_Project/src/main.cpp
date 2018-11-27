@@ -20,30 +20,18 @@
 #include "solarsystem.hpp"
 #include "circle.hpp"
 
-cirlce c;
+circle *c;
 GLint winWidth = 1200, winHeight = 750;
 
 
 
 void init(void) {
-	glClearColor(1.0, 1.0, 1.0, 0.0);
-	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
-	glutInitWindowPosition(150, 20);
-	glutInitWindowSize(winWidth, winHeight);
-	glutCreateWindow("Solar System Simulator");
-	glutSwapBuffers();
-
-}
-
-
-void winReshapeFcn(GLint newWidth, GLint newHeight) {
-	glViewport(0, 0, newWidth, newHeight);
+	glClearColor(0.0, 0.0, 0.0, 1.0);
 	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	gluOrtho2D(0.0, GLdouble(newWidth), GLdouble(newHeight), 0.0);
-	winWidth = newWidth;
-	winHeight = newHeight;
+	gluOrtho2D(0.0, winWidth, winHeight, 0.0);
+	glColor3f(1.0, 0.0, 0.0);
 	glFlush();
+
 }
 
 void mouseAction(GLint button, GLint action, GLint x, GLint y) {
@@ -56,15 +44,26 @@ void mouseMotion(GLint x, GLint y) {
 
 void draw(){
 	glClear(GL_COLOR_BUFFER_BIT);
-	GLfloat r;
+	GLint r;
 
-	new_object(500,200,300,100,&c);
-	printf("%d",c.x2);
-	r = sqrt(pow(c.x2-c.x1,2)+pow(c.y2-c.y1,2));
-	glColor3f(c.r,c.g,c.b);
-	circleMidpointFill(c.x1,c.y1,r);
-	glColor3f(c.r,c.g,c.b);
+	c = new_object(500,200,300,100);
+	printf("%d",c->x2);
+	r = sqrt(pow(c->x2-c->x1,2)+pow(c->y2-c->y1,2));
+	c->r = r;
+	glColor3f(c->r,c->g,c->b);
+	circleMidpointFill(c->x1,c->y1,c->r);
+	glColor3f(c->r,c->g,c->b);
 
+	glFlush();
+}
+
+void winReshapeFcn(GLint newWidth, GLint newHeight) {
+	glViewport(0, 0, newWidth, newHeight);
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	gluOrtho2D(0.0, GLdouble(newWidth), GLdouble(newHeight), 0.0);
+	winWidth = newWidth;
+	winHeight = newHeight;
 	glFlush();
 }
 
@@ -74,7 +73,11 @@ int main(int argc, char** argv) {
 	setvbuf(stderr, NULL, _IONBF, 0);
 
 	glutInit(&argc, argv);
-
+	Menu();
+	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+	glutInitWindowPosition(150, 20);
+	glutInitWindowSize(winWidth, winHeight);
+	glutCreateWindow("Solar System Simulator");
 
 	init();
 

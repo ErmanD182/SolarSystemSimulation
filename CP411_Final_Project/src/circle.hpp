@@ -14,14 +14,13 @@
 #include <stdio.h>
 #include <math.h>
 
-typedef struct cirlce{
+typedef struct circle{
     GLint x1,y1,x2,y2;
     GLfloat r, g, b;
     GLint radius;
 } circle;
 
-void new_object(GLint x1, GLint y1, GLint x2,  GLint y2, cirlce *c);
-void setPixel(GLint x, GLint y);
+circle * new_object(GLint x1, GLint y1, GLint x2,  GLint y2);
 void circlePlotPointsFill(GLint xc, GLint yc, GLint x, GLint y);
 void circleMidpointFill(GLint xc, GLint yc, GLfloat r);
 

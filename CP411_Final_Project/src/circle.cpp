@@ -7,27 +7,21 @@
 
 #include"circle.hpp"
 
-void new_object(GLint x1, GLint y1, GLint x2,  GLint y2, circle *c) {
+circle * new_object(GLint x1, GLint y1, GLint x2,  GLint y2){
+	circle *p = (circle *) malloc(sizeof(circle));
+    p->x1 = x1;
+    p->y1 = y1;
+    p->x2 = x2;
+    p->y2 = y2;
 
-    c->x1 = x1;
-    c->y1 = y1;
-    c->x2 = x2;
-    c->y2 = y2;
 
+    p->r = 1.0;
+    p->g = 0.0;
+    p->b = 0.0;
 
-    c->r = 1.0;
-    c->g = 0.0;
-    c->b = 0.0;
-
-    return;
+    return p;
 }
 
-void setPixel(GLint x, GLint y) {
-    glPointSize(2.0);
-    glBegin(GL_POINTS);
-    glVertex2i(x, y);
-    glEnd();
-}
 
 void circlePlotPointsFill(GLint xc, GLint yc, GLint x, GLint y) {
 	glLineWidth(2.0);
