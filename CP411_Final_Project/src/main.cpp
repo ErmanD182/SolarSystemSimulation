@@ -14,6 +14,8 @@
 #include <stdio.h>
 #include <GL/glut.h>
 #include <GL/gl.h>
+#include"menu.hpp"
+
 GLint winWidth = 1200, winHeight = 750;
 
 
@@ -54,7 +56,7 @@ int main(int argc, char** argv) {
 	setvbuf(stderr, NULL, _IONBF, 0);
 
 	glutInit(&argc, argv);
-
+	Menu();
 
 	init();
 
