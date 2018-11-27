@@ -7,6 +7,20 @@
 
 #include"circle.hpp"
 
+void new_object(GLint x1, GLint y1, GLint x2,  GLint y2, circle *c) {
+
+    c->x1 = x1;
+    c->y1 = y1;
+    c->x2 = x2;
+    c->y2 = y2;
+
+
+    c->r = 1.0;
+    c->g = 0.0;
+    c->b = 0.0;
+
+    return;
+}
 
 void setPixel(GLint x, GLint y) {
     glPointSize(2.0);
