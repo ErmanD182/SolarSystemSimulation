@@ -14,6 +14,9 @@
 #include <stdio.h>
 #include <GL/glut.h>
 #include <GL/gl.h>
+#include "solarsystem.hpp"
+
+
 GLint winWidth = 1200, winHeight = 750;
 
 
