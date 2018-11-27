@@ -16,12 +16,17 @@
 #include <GL/gl.h>
 #include"menu.hpp"
 
+#include <math.h>
+#include "solarsystem.hpp"
+#include "circle.hpp"
+
+cirlce c;
 GLint winWidth = 1200, winHeight = 750;
 
 
 
 void init(void) {
-	glClearColor(0.0, 0.0, 0.0, 1.0);
+	glClearColor(1.0, 1.0, 1.0, 0.0);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
 	glutInitWindowPosition(150, 20);
 	glutInitWindowSize(winWidth, winHeight);
@@ -49,6 +54,19 @@ void mouseMotion(GLint x, GLint y) {
 
 }
 
+void draw(){
+	glClear(GL_COLOR_BUFFER_BIT);
+	GLfloat r;
+
+	new_object(500,200,300,100,&c);
+	printf("%d",c.x2);
+	r = sqrt(pow(c.x2-c.x1,2)+pow(c.y2-c.y1,2));
+	glColor3f(c.r,c.g,c.b);
+	circleMidpointFill(c.x1,c.y1,r);
+	glColor3f(c.r,c.g,c.b);
+
+	glFlush();
+}
 
 int main(int argc, char** argv) {
 
@@ -56,10 +74,11 @@ int main(int argc, char** argv) {
 	setvbuf(stderr, NULL, _IONBF, 0);
 
 	glutInit(&argc, argv);
-	Menu();
+
 
 	init();
 
+	glutDisplayFunc(draw);
 	glutReshapeFunc(winReshapeFcn);
 	glutMouseFunc(mouseAction);
 	glutMotionFunc(mouseMotion);
