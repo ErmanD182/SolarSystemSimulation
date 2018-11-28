@@ -2,45 +2,43 @@
  * circle.cpp
  *
  *  Created on: Nov 27, 2018
- *      Author: erman
+ *      Author: erman and stuart
  */
 
 #include"circle.hpp"
 
-circle * new_object(GLint x1, GLint y1, GLint x2,  GLint y2){
-	circle *p = (circle *) malloc(sizeof(circle));
-    p->x1 = x1;
-    p->y1 = y1;
-    p->x2 = x2;
-    p->y2 = y2;
+planet2D * new_planet(GLint x1, GLint y1, GLint x2,  GLint y2, GLuint texture){
 
+    planet2D *p = (planet2D *)malloc(sizeof(planet2D));
+    p->c.x1 = x1;
+    p->c.y1 = y1;
+	p->c.x2 = x2;
+	p->c.y2 = y2;
 
-    p->r = 0.0;
-    p->g = 0.0;
-    p->b = 0.0;
-
-    p->radius = sqrt(pow(x2-x1,2)+pow(y2-y1,2));
+	p->c.radius = sqrt(pow(x2-x1,2)+pow(y2-y1,2));
+    p->texture = texture;
 
     return p;
 }
 
-void drawCircleOutline(circle *c, GLuint texture)
+void drawPlanet(planet2D *p)
 {
     float angle, radian, x, y, xcos, ysin, tx, ty;       // values needed by drawCircleOutline
 
     glEnable(GL_TEXTURE_2D);
-    glBindTexture(GL_TEXTURE_2D, texture);
+    glBindTexture(GL_TEXTURE_2D, p->texture);
 
     glBegin(GL_POLYGON);
 
+    //Drawing a cirlce with a texture algorithm
     for (angle=0.0; angle<360.0; angle+=2.0)
     {
     	radian = angle * (3.14/180.0f);
 
     	xcos = (float)cos(radian);
     	ysin = (float)sin(radian);
-    	x = xcos * c->radius  + c->x1;
-    	y = ysin * c->radius  + c->y1;
+    	x = xcos * p->c.radius  + p->c.x1;
+    	y = ysin * p->c.radius  + p->c.y1;
     	tx = xcos * 0.5 + 0.5;
     	ty = ysin * 0.5 + 0.5;
 
@@ -52,43 +50,8 @@ void drawCircleOutline(circle *c, GLuint texture)
     glDisable(GL_TEXTURE_2D);
 }
 
+GLuint loadBMP_custom(const char * imagepath){//For 2D Objects
 
-void circlePlotPointsFill(GLint xc, GLint yc, GLint x, GLint y, GLuint texture) {
-	glLineWidth(2.0);
-	glEnable(GL_TEXTURE_2D);
-	glBindTexture(GL_TEXTURE_2D, texture);
-	glBegin(GL_POLYGON);
-	glTexCoord2f(xc, yc);
-	glVertex2i(xc - x, yc + y);
-	glVertex2i(xc + x, yc + y);
-	glVertex2i(xc - x, yc - y);
-	glVertex2i(xc + x, yc - y);
-	glVertex2i(xc - y, yc + x);
-	glVertex2i(xc + y, yc + x);
-	glVertex2i(xc - y, yc - x);
-	glVertex2i(xc + y, yc - x);
-	glEnd();
-	glDisable(GL_TEXTURE_2D);
-}
-
-void circleMidpointFill(GLint xc, GLint yc, GLfloat r, GLuint texture) {
-	GLint p = 1 - r;
-	GLint x = 0, y = r;
-	circlePlotPointsFill(xc, yc, x, y, texture);
-	while (x < y) {
-			x++;
-			if (p < 0){
-				p += 2 * x + 1;
-			}else {
-				y--;
-				p += 2 * (x - y) + 1;
-			}
-			circlePlotPointsFill(xc, yc, x, y, texture);
-		}
-}
-
-
-GLuint loadBMP_custom(const char * imagepath){
 	// Data read from the header of the BMP file
 	unsigned char header[54]; // Each BMP file begins by a 54-bytes header
 	unsigned int dataPos;     // Position in the file where the actual data begins

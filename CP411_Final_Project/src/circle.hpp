@@ -18,18 +18,21 @@
 #include <iostream>
 #include <windows.h>
 
+
 typedef struct circle{
     GLint x1,y1,x2,y2;
-    GLfloat r, g, b;
     GLint radius;
-} circle;
+}circle;
 
-circle * new_object(GLint x1, GLint y1, GLint x2,  GLint y2);
-void circlePlotPointsFill(GLint xc, GLint yc, GLint x, GLint y, GLuint texture);
-void circleMidpointFill(GLint xc, GLint yc, GLfloat r, GLuint texture);
+typedef struct planet2D{
+	circle c;
+	GLuint texture;
+}planet2D;
+
+planet2D * new_planet(GLint x1, GLint y1, GLint x2,  GLint y2, GLuint texture);
 GLuint loadBMP_custom(const char * imagepath);
 
-void drawCircleOutline(circle *c, GLuint texture);
+void drawPlanet(planet2D *p);
 
 
 #endif /* CIRCLE_HPP_ */
