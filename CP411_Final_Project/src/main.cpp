@@ -20,7 +20,7 @@
 #include "solarsystem.hpp"
 
 
-circle *c;
+circle *sun;
 GLint winWidth = 1200, winHeight = 750;
 
 
@@ -46,12 +46,14 @@ void mouseMotion(GLint x, GLint y) {
 void draw(){
 	glClear(GL_COLOR_BUFFER_BIT);
 	//Sun
-	c = new_object(600,400,550,420);
+	sun = new_object(600,400,550,420);
 	glColor3f(225,225,225);
 	GLuint Texture = loadBMP_custom("sun.bmp");
-	drawCircleOutline(c, Texture);
+	drawCircleOutline(sun, Texture);
 	//circleMidpointFill(c->x1,c->y1,c->radius,Texture);
 	glColor3f(225,225,225);
+
+	//
 
 
 
