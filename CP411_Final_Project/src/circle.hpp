@@ -8,23 +8,31 @@
 #ifndef CIRCLE_HPP_
 #define CIRCLE_HPP_
 
+#include "GL/glew.h"
 #include <GL/gl.h>
 #include <GL/glut.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
+#include <fstream>
+#include <iostream>
+#include <windows.h>
+
 
 typedef struct circle{
     GLint x1,y1,x2,y2;
-    GLfloat r, g, b;
     GLint radius;
-} circle;
+}circle;
 
-void new_object(GLint x1, GLint y1, GLint x2,  GLint y2, circle *c);
-void setPixel(GLint x, GLint y);
-void circlePlotPointsFill(GLint xc, GLint yc, GLint x, GLint y);
-void circleMidpointFill(GLint xc, GLint yc, GLfloat r);
+typedef struct planet2D{
+	circle c;
+	GLuint texture;
+}planet2D;
 
+planet2D * new_planet(GLint x1, GLint y1, GLint x2,  GLint y2, GLuint texture);
+GLuint loadBMP_custom(const char * imagepath);
+
+void drawPlanet(planet2D *p);
 
 
 #endif /* CIRCLE_HPP_ */

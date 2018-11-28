@@ -8,6 +8,9 @@
 #ifndef SOLARSYSTEM_HPP_
 #define SOLARSYSTEM_HPP_
 
+#include "circle.hpp"
+
+planet2D planets[10];
 
 
 
