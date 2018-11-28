@@ -9,7 +9,7 @@
 >>>>>>> branch 'master' of https://github.com/ErmanD182/SolarSystemSimulation.git
  */
 
-
+#include "circle.hpp"
 #include <stdlib.h>
 #include <stdio.h>
 #include <GL/glut.h>
@@ -18,10 +18,11 @@
 
 #include <math.h>
 #include "solarsystem.hpp"
-#include "circle.hpp"
+
 
 circle *c;
 GLint winWidth = 1200, winHeight = 750;
+
 
 
 
@@ -44,15 +45,15 @@ void mouseMotion(GLint x, GLint y) {
 
 void draw(){
 	glClear(GL_COLOR_BUFFER_BIT);
-	GLint r;
+	//Sun
+	c = new_object(600,400,550,420);
+	glColor3f(225,225,225);
+	GLuint Texture = loadBMP_custom("sun.bmp");
+	drawCircleOutline(c, Texture);
+	//circleMidpointFill(c->x1,c->y1,c->radius,Texture);
+	glColor3f(225,225,225);
 
-	c = new_object(500,200,300,100);
-	printf("%d",c->x2);
-	r = sqrt(pow(c->x2-c->x1,2)+pow(c->y2-c->y1,2));
-	c->r = r;
-	glColor3f(c->r,c->g,c->b);
-	circleMidpointFill(c->x1,c->y1,c->r);
-	glColor3f(c->r,c->g,c->b);
+
 
 	glFlush();
 }
