@@ -21,9 +21,9 @@
 
 
 circle *cir;
-planet2D *p;
+planet2D *sun, *mercury;
 GLint winWidth = 1200, winHeight = 750;
-
+GLuint texture;
 
 
 
@@ -46,20 +46,26 @@ void mouseMotion(GLint x, GLint y) {
 
 void draw(){
 	glClear(GL_COLOR_BUFFER_BIT);
+
 	//Sun
 
+	texture = loadBMP_custom("sun.bmp");
+	sun = new_planet(600,400,53, 0, 0, texture);
+	drawPlanet(sun);
 
-	glColor3f(225,225,225);
-	GLuint Texture = loadBMP_custom("sun.bmp");
-	p = new_planet(600,400,550,420,Texture);
-	drawPlanet(p);
-	//circleMidpointFill(c->x1,c->y1,c->radius,Texture);
-	glColor3f(225,225,225);
+	//Mercury
+	texture = loadBMP_custom("mercury.bmp");
+	mercury = new_planet(700,400,15, 100, 20, texture);
+	drawPlanet(mercury);
 
+
+	//venus orbit
+	//circleMidpoint(600,400,130);
 
 
 	glFlush();
 }
+
 
 void winReshapeFcn(GLint newWidth, GLint newHeight) {
 	glViewport(0, 0, newWidth, newHeight);

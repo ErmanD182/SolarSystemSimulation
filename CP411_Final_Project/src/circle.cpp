@@ -7,15 +7,14 @@
 
 #include"circle.hpp"
 
-planet2D * new_planet(GLint x1, GLint y1, GLint x2,  GLint y2, GLuint texture){
+planet2D * new_planet(GLint x1, GLint y1, GLint radius, GLint radiusOrb, GLint radiusGrav, GLuint texture){
 
     planet2D *p = (planet2D *)malloc(sizeof(planet2D));
     p->c.x1 = x1;
     p->c.y1 = y1;
-	p->c.x2 = x2;
-	p->c.y2 = y2;
-
-	p->c.radius = sqrt(pow(x2-x1,2)+pow(y2-y1,2));
+	p->c.radius = radius;
+	p->radiusOrb = radiusOrb;
+	p->radiusGrav = radiusGrav;
     p->texture = texture;
 
     return p;
@@ -24,10 +23,10 @@ planet2D * new_planet(GLint x1, GLint y1, GLint x2,  GLint y2, GLuint texture){
 void drawPlanet(planet2D *p)
 {
     float angle, radian, x, y, xcos, ysin, tx, ty;       // values needed by drawCircleOutline
-
+    drawOrbit(p->radiusOrb);
     glEnable(GL_TEXTURE_2D);
     glBindTexture(GL_TEXTURE_2D, p->texture);
-
+    glColor3f(225,225,225);
     glBegin(GL_POLYGON);
 
     //Drawing a cirlce with a texture algorithm
@@ -45,10 +44,61 @@ void drawPlanet(planet2D *p)
     	glTexCoord2f(tx, ty);
     	glVertex2f(x, y);
     }
-
     glEnd();
+    glColor3f(225,225,225);
     glDisable(GL_TEXTURE_2D);
+
+
+
+
+    glFlush();
+
 }
+
+
+
+void drawOrbit(GLint radius){
+	glColor3f(0.176,0.224,0.5);
+	circleMidpoint(600,400,radius);
+	glColor3f(0.176,0.224,0.5);
+}
+
+void setPixel(GLint x, GLint y) {
+    glPointSize(2.0);
+    glBegin(GL_POINTS);
+    glVertex2i(x, y);
+    glEnd();
+}
+
+void circlePlotPoints(const GLint& xc, const GLint& yc, const GLint& x, const GLint& y) {
+	setPixel(xc+ x, yc+ y);
+	setPixel(xc-x, yc+ y);
+	setPixel(xc+ x, yc- y);
+	setPixel(xc-x, yc-y);
+	setPixel(xc+ y, yc+ x);
+	setPixel(xc-y, yc+ x);
+	setPixel(xc+ y, yc- x);
+	setPixel(xc-y, yc-x);
+}
+
+void circleMidpoint(GLint xc, GLint yc, GLfloat r) {
+	GLint p = 1 - r;
+		GLint x = 0, y = r;
+		circlePlotPoints(xc, yc, x, y);
+		while (x < y) {
+				x++;
+				if (p < 0){
+					p += 2 * x + 1;
+				}else {
+					y--;
+					p += 2 * (x - y) + 1;
+				}
+				circlePlotPoints(xc, yc, x, y);
+			}
+}
+
+
+
 
 GLuint loadBMP_custom(const char * imagepath){//For 2D Objects
 

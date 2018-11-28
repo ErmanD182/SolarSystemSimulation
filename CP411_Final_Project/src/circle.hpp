@@ -26,13 +26,17 @@ typedef struct circle{
 
 typedef struct planet2D{
 	circle c;
+	GLint radiusOrb;
+	GLint radiusGrav;
 	GLuint texture;
 }planet2D;
 
-planet2D * new_planet(GLint x1, GLint y1, GLint x2,  GLint y2, GLuint texture);
+planet2D * new_planet(GLint x1, GLint y1, GLint radius, GLint radiusOrb, GLint radiusGrav, GLuint texture);
 GLuint loadBMP_custom(const char * imagepath);
-
+void setPixel(GLint x, GLint y);
+void circleMidpoint(GLint xc, GLint yc, GLfloat r);
+void circlePlotPoints(const GLint& xc, const GLint& yc, const GLint& x, const GLint& y);
 void drawPlanet(planet2D *p);
-
+void drawOrbit(GLint radius);
 
 #endif /* CIRCLE_HPP_ */
