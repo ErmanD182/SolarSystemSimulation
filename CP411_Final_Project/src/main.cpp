@@ -24,7 +24,7 @@ circle *cir;
 planet2D *sun, *mercury;
 GLint winWidth = 1200, winHeight = 750;
 GLuint texture;
-
+float posX = 0, posY = 0, posZ = 0, angle = 0;
 
 
 void init(void) {
@@ -36,15 +36,43 @@ void init(void) {
 
 }
 
-void mouseAction(GLint button, GLint action, GLint x, GLint y) {
 
+void mouseAction(GLint button, GLint action, GLint x, GLint y) {
+if (button == GLUT_LEFT_BUTTON){
+	if (action == GLUT_DOWN){
+
+	}
 }
 
+}
 void mouseMotion(GLint x, GLint y) {
 
 }
 
-void draw(){
+void animate(void){
+    glMatrixMode(GL_MODELVIEW);
+    //glLoadIdentity();
+	glPushMatrix(); // put current matrix on stack
+
+
+	glTranslatef(posX, posY, posZ);
+	drawPlanet(mercury); // draw the robot
+	glPopMatrix();
+	glFlush();
+	//glutPostRedisplay();
+
+}
+
+void timer(int)
+{
+	angle = angle + 0.01;
+	posX = sun->c.x1 + mercury->radiusOrb*cos(angle);
+	posY = sun->c.y1 + mercury->radiusOrb*sin(angle);
+    glutPostRedisplay();
+    glutTimerFunc(20, timer, 0);
+}
+
+void draw(void){
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	//Sun
@@ -55,8 +83,16 @@ void draw(){
 
 	//Mercury
 	texture = loadBMP_custom("mercury.bmp");
-	mercury = new_planet(700,400,15, 100, 20, texture);
-	drawPlanet(mercury);
+	mercury = new_planet(0,0,15, 100, 20, texture);
+	drawOrbit(mercury->radiusOrb);
+
+
+	animate();
+
+
+
+
+
 
 
 	//venus orbit
@@ -64,7 +100,12 @@ void draw(){
 
 
 	glFlush();
+//	glutSwapBuffers();
 }
+
+
+
+
 
 
 void winReshapeFcn(GLint newWidth, GLint newHeight) {
@@ -92,6 +133,7 @@ int main(int argc, char** argv) {
 	init();
 
 	glutDisplayFunc(draw);
+	glutTimerFunc(20, timer, 0);
 	glutReshapeFunc(winReshapeFcn);
 	glutMouseFunc(mouseAction);
 	glutMotionFunc(mouseMotion);
