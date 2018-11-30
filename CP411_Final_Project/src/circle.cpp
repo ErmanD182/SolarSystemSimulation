@@ -48,15 +48,13 @@ void drawPlanet(planet2D *p)
     glColor3f(225,225,225);
     glDisable(GL_TEXTURE_2D);
 
- //   glFlush();
-
 }
 
 
 
-void drawOrbit(GLint radius){
+void drawOrbit(GLint x, GLint y, GLint radius){
 	glColor3f(0.176,0.224,0.5);
-	circleMidpoint(600,400,radius);
+	circleMidpoint(x,y,radius);
 	glColor3f(0.176,0.224,0.5);
 }
 

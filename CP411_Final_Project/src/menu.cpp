@@ -6,7 +6,7 @@
  */
 
 #include"menu.hpp"
-
+extern GLint view, option;
 
 void mainMenu(GLint option) {
     switch (option) {
@@ -21,34 +21,28 @@ void mainMenu(GLint option) {
     glutPostRedisplay();
 }
 
-void viewSwitchSubMenu(GLint option){
-	 switch (option) {
-	 case 1:{
-		 //2d view
+void viewSwitchSubMenu(GLint transOption){
+	 option = transOption;
+
+	 //2D
+	 if (option == 1){
+		 view = 0;
 	 }
-	 break;
-	 case 2:{
-		 //3dview
-	 }
-	 break;
+	 //3D
+	 else if (option == 2){
+		 view = 1;
 	 }
 
 	 glutPostRedisplay();
 }
 
 
-void cameraSubMenu(GLint option){
-	switch(option){
+void cameraSubMenu(GLint transOption){
+	option = transOption;
 
-
-
-
-
-
-	}
-
+	glutPostRedisplay();
 }
-void asteroidSubMenu(GLint option){
+void asteroidSubMenu(GLint transOption){
 	switch(option){
 
 

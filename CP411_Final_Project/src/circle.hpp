@@ -37,6 +37,6 @@ void setPixel(GLint x, GLint y);
 void circleMidpoint(GLint xc, GLint yc, GLfloat r);
 void circlePlotPoints(const GLint& xc, const GLint& yc, const GLint& x, const GLint& y);
 void drawPlanet(planet2D *p);
-void drawOrbit(GLint radius);
+void drawOrbit(GLint x, GLint y,GLint radius);
 
 #endif /* CIRCLE_HPP_ */
