@@ -27,6 +27,8 @@ GLint move = 0;
 GLint xbegin = 0, ybegin = 0;
 GLint view = 0, option = 0;
 
+GLint theta;
+
 void init(void) {
 	glClearColor(0.0, 0.0, 0.0, 1.0);
 	glMatrixMode(GL_PROJECTION);
@@ -56,7 +58,14 @@ if (button == GLUT_LEFT_BUTTON){
 
 }
 void mouseMotion(GLint x, GLint y) {
+	theta = (xbegin - x > 0) ? 1 : -1;
+}
 
+void display(void) {
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	draw();
+	glFlush();
+	glutSwapBuffers();
 }
 
 void winReshapeFcn(GLint newWidth, GLint newHeight) {
@@ -83,7 +92,7 @@ int main(int argc, char** argv) {
 
 	init();
 
-	glutDisplayFunc(draw);
+	glutDisplayFunc(display);
 	glutTimerFunc(25, update, 0);
 	glutReshapeFunc(winReshapeFcn);
 	glutMouseFunc(mouseAction);
