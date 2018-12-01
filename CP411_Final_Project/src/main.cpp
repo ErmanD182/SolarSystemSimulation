@@ -92,6 +92,7 @@ int main(int argc, char** argv) {
 	init();
 
 	glutDisplayFunc(draw);
+
 	glutReshapeFunc(winReshapeFcn);
 	glutMouseFunc(mouseAction);
 	glutMotionFunc(mouseMotion);
