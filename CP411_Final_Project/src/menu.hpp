@@ -10,6 +10,7 @@
 
 #include <GL/glut.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 void mainMenu(GLint option);
 void viewSwitchSubMenu(GLint option);

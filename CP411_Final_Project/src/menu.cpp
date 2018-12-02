@@ -6,12 +6,13 @@
  */
 
 #include"menu.hpp"
-
-
+extern GLint view, option;
+GLint oldView;
 void mainMenu(GLint option) {
+	view = 0;
     switch (option) {
     case 1:{
-    	//restartAnimation();
+    	view = 3;
     }
         break;
     case 2:{
@@ -21,34 +22,38 @@ void mainMenu(GLint option) {
     glutPostRedisplay();
 }
 
-void viewSwitchSubMenu(GLint option){
-	 switch (option) {
-	 case 1:{
-		 //2d view
+void viewSwitchSubMenu(GLint transOption){
+	 option = transOption;
+
+	 //2D
+	 if (option == 1){
+		 view = 0;
 	 }
-	 break;
-	 case 2:{
-		 //3dview
+	 //3D
+	 else if (option == 2){
+		 view = 1;
 	 }
-	 break;
+	 //Pause
+	 else if(option == 3){
+		 if(view != 2){
+			 oldView = view;
+			 view = 2;
+		 }else{
+			 view = oldView;
+		 }
+
 	 }
 
 	 glutPostRedisplay();
 }
 
 
-void cameraSubMenu(GLint option){
-	switch(option){
+void cameraSubMenu(GLint transOption){
+	option = transOption;
 
-
-
-
-
-
-	}
-
+	glutPostRedisplay();
 }
-void asteroidSubMenu(GLint option){
+void asteroidSubMenu(GLint transOption){
 	switch(option){
 
 
@@ -66,6 +71,7 @@ void Menu(){
 	GLint viewSwitch_SubMenu = glutCreateMenu(viewSwitchSubMenu);
 	glutAddMenuEntry("2D View", 1);
 	glutAddMenuEntry("3D View", 2);
+	glutAddMenuEntry("Pause Animation/Resume Animation",3);
 
 	GLint camera_SubMenu = glutCreateMenu(cameraSubMenu);
 	glutAddMenuEntry("Rotate x ", 1);

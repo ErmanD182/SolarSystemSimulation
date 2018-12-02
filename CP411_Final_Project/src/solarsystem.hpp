@@ -9,9 +9,17 @@
 #define SOLARSYSTEM_HPP_
 
 #include "circle.hpp"
+#include <GL/gl.h>
+#include <GL/glut.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <math.h>
 
-planet2D planets[10];
 
+
+void draw(void);
+void update(int);
+void animate(void);
 
 
 

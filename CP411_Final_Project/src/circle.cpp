@@ -23,7 +23,7 @@ planet2D * new_planet(GLint x1, GLint y1, GLint radius, GLint radiusOrb, GLint r
 void drawPlanet(planet2D *p)
 {
     float angle, radian, x, y, xcos, ysin, tx, ty;       // values needed by drawCircleOutline
-    drawOrbit(p->radiusOrb);
+   // drawOrbit(p->radiusOrb);
     glEnable(GL_TEXTURE_2D);
     glBindTexture(GL_TEXTURE_2D, p->texture);
     glColor3f(225,225,225);
@@ -48,18 +48,13 @@ void drawPlanet(planet2D *p)
     glColor3f(225,225,225);
     glDisable(GL_TEXTURE_2D);
 
-
-
-
-    glFlush();
-
 }
 
 
 
-void drawOrbit(GLint radius){
+void drawOrbit(GLint x, GLint y, GLint radius){
 	glColor3f(0.176,0.224,0.5);
-	circleMidpoint(600,400,radius);
+	circleMidpoint(x,y,radius);
 	glColor3f(0.176,0.224,0.5);
 }
 
