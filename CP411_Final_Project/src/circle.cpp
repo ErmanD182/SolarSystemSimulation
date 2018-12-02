@@ -58,6 +58,43 @@ void drawOrbit(GLint x, GLint y, GLint radius){
 	glColor3f(0.176,0.224,0.5);
 }
 
+void drawField(GLint x, GLint y, GLint radius){
+	glColor3f(0.176,0.224,0.5);
+	circleMidpointFill(x,y,radius);
+	glColor3f(0.176,0.224,0.5);
+}
+
+void circleMidpointFill(GLint x1, GLint y1, GLint radius){
+
+	GLint p = 1-radius;
+	GLint x=0,y=radius;
+	circlePlotPointsFill(x1,y1,x,y);
+	while(x<y){
+		x++;
+		if(p<0){
+			p +=2*x+1;
+		}else{
+			y--;
+			p += 2*(x-y)+1;
+		}
+		circlePlotPointsFill(x1,y1,x,y);
+	}
+}
+
+void circlePlotPointsFill(GLint xc, GLint yc, GLint x, GLint y) {
+	glLineWidth(2.0);
+    glBegin(GL_LINES);
+    glVertex2i(xc - x, yc + y);
+    glVertex2i(xc + x, yc + y);
+    glVertex2i(xc - x, yc - y);
+    glVertex2i(xc + x, yc - y);
+    glVertex2i(xc - y, yc + x);
+    glVertex2i(xc + y, yc + x);
+    glVertex2i(xc - y, yc - x);
+    glVertex2i(xc + y, yc - x);
+    glEnd();
+}
+
 void setPixel(GLint x, GLint y) {
     glPointSize(2.0);
     glBegin(GL_POINTS);

@@ -11,7 +11,7 @@ float posX[9], posY[9], angle[9];
 const int SUNX = 600, SUNY = 400;
 extern GLuint sunTexture, mercuryTexture, venusTexture, earthTexture, marsTexture,jupitorTexture;
 extern GLuint saturnTexture, uranusTexture, neptuneTexture, plutoTexture;
-extern GLint view;
+extern GLint view,orbits,gravFields;
 
 void draw(void){
 	//Sun
@@ -22,39 +22,54 @@ void draw(void){
 
 	//Mercury
 	mercury = new_planet(0,0,15,100,20,mercuryTexture);
-	drawOrbit(SUNX,SUNY,mercury->radiusOrb);
+
 
 	//Venus
 	venus = new_planet(0,0,20,150,30,venusTexture);
-	drawOrbit(SUNX + 4,SUNY + 2,venus->radiusOrb);
+
 
 	//Earth
 	earth = new_planet(0,0,21,210,30,earthTexture);
-	drawOrbit(SUNX - 6,SUNY + 3,earth->radiusOrb);
+
 
 	//Mars
 	mars = new_planet(0,0,16,250,30,marsTexture);
-	drawOrbit(SUNX - 4,SUNY + 2,mars->radiusOrb);
+
 
 	//Jupitor
 	jupitor = new_planet(0,0,30,340,30,jupitorTexture);
-	drawOrbit(SUNX,SUNY,jupitor->radiusOrb);
+
 
 	//Saturn
 	saturn = new_planet(0,0,25,420,30,saturnTexture);
-	drawOrbit(SUNX + 3,SUNY + 2, saturn->radiusOrb);
+
 
 	//Uranus
 	uranus = new_planet(0,0,22,500,30,uranusTexture);
-	drawOrbit(SUNX - 2,SUNY + 1, uranus->radiusOrb);
+
 
 	//Neptune
 	neptune = new_planet(0,0,21.5,570,30,neptuneTexture);
-	drawOrbit(SUNX - 4,SUNY + 2, neptune->radiusOrb);
+
 
 	//Pluto
 	pluto = new_planet(0,0,12,630,30,plutoTexture);
-	drawOrbit(SUNX + 13,SUNY + 5, pluto->radiusOrb);
+
+
+	if(orbits == 0){
+		drawOrbit(SUNX,SUNY,mercury->radiusOrb);
+		drawOrbit(SUNX + 4,SUNY + 2,venus->radiusOrb);
+		drawOrbit(SUNX - 6,SUNY + 3,earth->radiusOrb);
+		drawOrbit(SUNX - 4,SUNY + 2,mars->radiusOrb);
+		drawOrbit(SUNX,SUNY,jupitor->radiusOrb);
+		drawOrbit(SUNX + 3,SUNY + 2, saturn->radiusOrb);
+		drawOrbit(SUNX - 2,SUNY + 1, uranus->radiusOrb);
+		drawOrbit(SUNX - 4,SUNY + 2, neptune->radiusOrb);
+		drawOrbit(SUNX + 13,SUNY + 5, pluto->radiusOrb);
+
+	}
+
+
 
 	animate();
 
@@ -124,6 +139,17 @@ void update(int) {
 }
 
 void animate(void){
+	if(gravFields == 0){
+		drawField(posX[0],posY[0],mercury->radiusGrav);
+		drawField(posX[1],posY[1],venus->radiusGrav);
+		drawField(posX[2],posY[2],earth->radiusGrav);
+		drawField(posX[3],posY[3],mars->radiusGrav);
+		drawField(posX[4],posY[4],jupitor->radiusGrav);
+		drawField(posX[5],posY[5],saturn->radiusGrav);
+		drawField(posX[6],posY[6],uranus->radiusGrav);
+		drawField(posX[7],posY[7],neptune->radiusGrav);
+		drawField(posX[8],posY[8],pluto->radiusGrav);
+	}
 
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
@@ -132,6 +158,7 @@ void animate(void){
 	glTranslatef(posX[0], posY[0], 0);
 	drawPlanet(mercury);
 	glPopMatrix();
+
 
 	glPushMatrix();
 	glTranslatef(posX[1], posY[1], 0);

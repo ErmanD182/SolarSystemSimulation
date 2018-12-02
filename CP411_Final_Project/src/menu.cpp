@@ -6,7 +6,7 @@
  */
 
 #include"menu.hpp"
-extern GLint view, option;
+extern GLint view, option, orbits, gravFields;
 GLint oldView;
 void mainMenu(GLint option) {
 	view = 0;
@@ -63,6 +63,25 @@ void asteroidSubMenu(GLint transOption){
 
 }
 
+void modelSubMenu(GLint transOption){
+	option = transOption;
+	//Turn on/off orbits. 0 for on, 1 for off
+	if(option == 1){
+		if(orbits == 0){
+			orbits = 1;
+		}else{
+			orbits = 0;
+		}
+	//Turn on/off gravitational fields
+	}else if(option == 2){
+		if(gravFields == 0){
+			gravFields = 1;
+		}else{
+			gravFields = 0;
+		}
+	}
+}
+
 
 
 
@@ -84,12 +103,16 @@ void Menu(){
 	GLint asteroid_SubMenu = glutCreateMenu(asteroidSubMenu);
 	glutAddMenuEntry("Spawn Asteroid", 1);
 
+	GLint model_SubMenu = glutCreateMenu(modelSubMenu);
+	glutAddMenuEntry("Orbits", 1);
+	glutAddMenuEntry("Gravitational Fields",2);
 
 	glutCreateMenu(mainMenu);
 	glutAddMenuEntry(" Restart Animation", 1);
 	glutAddSubMenu(" View Switch",viewSwitch_SubMenu);
 	glutAddSubMenu(" Camera",camera_SubMenu);
 	glutAddSubMenu(" Asteroid Options",asteroid_SubMenu);
+	glutAddSubMenu(" Model Options",model_SubMenu);
 	glutAddMenuEntry(" Quit", 2);
 
 

@@ -25,7 +25,7 @@ GLuint saturnTexture,uranusTexture, neptuneTexture, plutoTexture;
 
 GLint move = 0;
 GLint xbegin = 0, ybegin = 0;
-GLint view = 0, option = 0;
+GLint view = 0, option = 0,orbits=0,gravFields=0;
 
 GLint theta;
 
