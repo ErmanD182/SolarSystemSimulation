@@ -7,7 +7,7 @@
 #include"solarsystem.hpp"
 
 planet2D *sun, *mercury, *venus, *earth, *mars, *jupitor, *saturn, *uranus, *neptune, *pluto;
-float posX[9], posY[9], angle[9], posX3D[9], posY3D[9], angle3D[9], asteroidX = 100, asteroidY = 0, random;
+float posX[9], posY[9], angle[9], posX3D[9], posY3D[9], angle3D[9], asteroidX = 70.0, asteroidY = 0.0, random = rand() % 21 + (-10);
 const int SUNX = 600, SUNY = 400;
 extern GLuint sunTexture, mercuryTexture, venusTexture, earthTexture, marsTexture,jupitorTexture;
 extern GLuint saturnTexture, uranusTexture, neptuneTexture, plutoTexture, asteroidTexture;
@@ -18,13 +18,12 @@ extern GLfloat speed;
 GLfloat rx,ry,rz;
 Sphere *sun3D = new Sphere(), *mercury3D = new Sphere(), *venus3D = new Sphere(), *earth3D = new Sphere();
 Sphere *mars3D = new Sphere(), *jupitor3D = new Sphere(), *saturn3D = new Sphere(), *uranus3D = new Sphere();
-Sphere *neptune3D = new Sphere(), *pluto3D = new Sphere(), *asteroid = new Sphere();;
+Sphere *neptune3D = new Sphere(), *pluto3D = new Sphere();
+Sphere *asteroid = new Sphere();
 Sphere *mercuryField = new Sphere(),*venusField = new Sphere(),*earthField = new Sphere(),*marsField = new Sphere();
 Sphere *jupitorField = new Sphere(), *saturnField = new Sphere(),*uranusField = new Sphere(),*neptuneField = new Sphere(), *plutoField = new Sphere();
 
 void spawnAsteroid(void){
-	srand((unsigned int)time(NULL));
-	random = ((float)rand()/(float)(RAND_MAX)) * 0.05;
 
 	glPushMatrix();
 	glTranslatef(asteroidX, asteroidY, 0);
@@ -35,6 +34,7 @@ void spawnAsteroid(void){
 	asteroid->rotateMC(rx,ry,rz,1);
 	asteroid->draw();
 	glPopMatrix();
+
 }
 
 
@@ -102,8 +102,6 @@ void draw2D(void){
 }
 
 void draw3D(void){
-
-
 sun3D->textureID = sunTexture;
 sun3D->radius = 2;
 
@@ -276,10 +274,23 @@ void update(int) {
 			posX3D[8] = 40*cos(angle3D[8]);
 			posY3D[8] = 40*sin(angle3D[8]);
 
+
 			if (spawn == 1){
-				asteroidX = asteroidX - 0.1;
+				if (asteroidX == 70){
+					random = random/100;
+				}
+				asteroidX = asteroidX - 0.4;
 				asteroidY = asteroidY + random;
+
 			}
+
+			if (asteroidX <= -60.0){
+				spawn = 0;
+				asteroidX = 70.0;
+				asteroidY = 0.0;
+				random = rand() % 21 + (-10);
+			}
+
 		}
     glutPostRedisplay();
     glutTimerFunc(25, update, 0);
@@ -355,8 +366,6 @@ void animate(void){
 	}
 
 	else if (view == 1){
-
-
 		//glEnable(GL_LIGHTING);
 		//glEnable(GL_LIGHT0);
 		glEnable(GL_DEPTH_TEST);
@@ -464,6 +473,8 @@ void animate(void){
 			spawnAsteroid();
 		}
 
+
+
 		sun3D->draw();
 		if(gravFields == 0){
 			glPushMatrix();
@@ -522,7 +533,6 @@ void animate(void){
 
 		}
 	}
-
 
 	glutSwapBuffers();
 }
