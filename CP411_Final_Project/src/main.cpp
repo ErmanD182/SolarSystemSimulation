@@ -21,7 +21,7 @@
 
 GLint winWidth = 1200, winHeight = 750;
 GLuint sunTexture, mercuryTexture, venusTexture, earthTexture, marsTexture,jupitorTexture;
-GLuint saturnTexture,uranusTexture, neptuneTexture, plutoTexture;
+GLuint saturnTexture,uranusTexture, neptuneTexture, plutoTexture, asteroidTexture;
 
 GLint move = 0;
 GLint xbegin = 0, ybegin = 0;
@@ -51,6 +51,7 @@ void init(void) {
 	uranusTexture = loadBMP_custom("uranus.bmp");
 	neptuneTexture = loadBMP_custom("neptune.bmp");
 	plutoTexture = loadBMP_custom("pluto.bmp");
+	asteroidTexture = loadBMP_custom("asteroid.bmp");
 	camera.setDefaultCamera();
 	glFlush();
 }

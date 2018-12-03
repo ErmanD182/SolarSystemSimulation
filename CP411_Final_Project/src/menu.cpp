@@ -7,12 +7,12 @@
 
 #include"menu.hpp"
 extern GLint view, option, cameraSelect, orbits, gravFields, lockCamera;
-GLint oldView;
+GLint oldView, spawn = 0;
 
 void mainMenu(GLint option) {
-	view = 0;
     switch (option) {
     case 1:{
+    	oldView = view;
     	view = 3;
     }
         break;
@@ -103,7 +103,10 @@ void lockCamSubMenu(GLint transOption){
 }
 
 void asteroidSubMenu(GLint transOption){
-
+	option = transOption;
+	if (option == 1){
+		spawn = 1;
+	}
 	glutPostRedisplay();
 }
 

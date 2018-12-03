@@ -7,16 +7,33 @@
 #include"solarsystem.hpp"
 
 planet2D *sun, *mercury, *venus, *earth, *mars, *jupitor, *saturn, *uranus, *neptune, *pluto;
-float posX[9], posY[9], angle[9], posX3D[9], posY3D[9], angle3D[9];
+float posX[9], posY[9], angle[9], posX3D[9], posY3D[9], angle3D[9], asteroidX = 100, asteroidY = 0, random;
 const int SUNX = 600, SUNY = 400;
 extern GLuint sunTexture, mercuryTexture, venusTexture, earthTexture, marsTexture,jupitorTexture;
-extern GLuint saturnTexture, uranusTexture, neptuneTexture, plutoTexture;
+extern GLuint saturnTexture, uranusTexture, neptuneTexture, plutoTexture, asteroidTexture;
 extern GLint view, orbits, gravFields, winWidth, winHeight, lockCamera;
 extern Camera camera;
+extern GLint oldView, spawn;
 GLfloat rx,ry,rz;
 Sphere *sun3D = new Sphere(), *mercury3D = new Sphere(), *venus3D = new Sphere(), *earth3D = new Sphere();
 Sphere *mars3D = new Sphere(), *jupitor3D = new Sphere(), *saturn3D = new Sphere(), *uranus3D = new Sphere();
-Sphere *neptune3D = new Sphere(), *pluto3D = new Sphere();
+Sphere *neptune3D = new Sphere(), *pluto3D = new Sphere(), *asteroid = new Sphere();;
+
+void spawnAsteroid(void){
+	srand((unsigned int)time(NULL));
+	random = ((float)rand()/(float)(RAND_MAX)) * 0.05;
+
+	glPushMatrix();
+	glTranslatef(asteroidX, asteroidY, 0);
+	glTranslatef(asteroidX, asteroidY, 0);
+	rx = asteroid->getMC().mat[0][1];
+	ry = asteroid->getMC().mat[1][1];
+	rz =asteroid->getMC().mat[2][1];
+	asteroid->rotateMC(rx,ry,rz,1);
+	asteroid->draw();
+	glPopMatrix();
+}
+
 
 void draw2D(void){
 	glClear(GL_COLOR_BUFFER_BIT);
@@ -113,6 +130,9 @@ neptune3D->radius = 1.3;
 pluto3D->textureID = plutoTexture;
 pluto3D->radius = 0.3;
 
+asteroid->textureID = asteroidTexture;
+asteroid->radius = 0.5;
+
 
 if (orbits == 0){
 	drawOrbit(0,0,4);
@@ -127,8 +147,12 @@ if (orbits == 0){
 	drawOrbit(0,0,80);
 }
 
+
+
+
 lockCam();
 animate();
+//spawn = 0;
 }
 
 void update(int) {
@@ -138,8 +162,12 @@ void update(int) {
 				posX[i] = 0;
 				posY[i] = 0;
 				angle[i] = 0;
+
+				posX3D[i] = 0;
+				posY3D[i] = 0;
+				angle3D[i] = 0;
 			}
-			view = 0;
+			view = oldView;
 		}
 		else if(view==0){//DRAW 2D
 
@@ -232,6 +260,11 @@ void update(int) {
 			angle3D[8] = angle3D[8] + 0.0012;
 			posX3D[8] = 40*cos(angle3D[8]);
 			posY3D[8] = 40*sin(angle3D[8]);
+
+			if (spawn == 1){
+				asteroidX = asteroidX - 0.1;
+				asteroidY = asteroidY + random;
+			}
 		}
     glutPostRedisplay();
     glutTimerFunc(25, update, 0);
@@ -410,7 +443,9 @@ void animate(void){
 		pluto3D->draw();
 		glPopMatrix();
 
-
+		if (spawn == 1){
+			spawnAsteroid();
+		}
 
 		sun3D->draw();
 	}
@@ -420,13 +455,18 @@ void animate(void){
 
 void lockCam(void){
 	Point p;
+	if (lockCamera != 0){
+		camera.viewAngle = 60;
+	}
+	else{
+		camera.viewAngle = 70;
+	}
+
 	if (lockCamera == 0){
 		p.set(0,0,0);
-		camera.viewAngle = 70;
 	}
 	else if (lockCamera == 1){
 		p.set(posX3D[0],posY3D[0],0);
-		camera.viewAngle = 30;
 	}
 
 	else if (lockCamera == 2){
@@ -440,6 +480,26 @@ void lockCam(void){
 	else if (lockCamera == 4){
 		p.set(posX3D[3],posY3D[3],0);
 	}
+
+	else if (lockCamera == 5){
+			p.set(posX3D[4],posY3D[4],0);
+		}
+
+	else if (lockCamera == 6){
+			p.set(posX3D[5],posY3D[5],0);
+		}
+
+	else if (lockCamera == 7){
+			p.set(posX3D[6],posY3D[6],0);
+		}
+
+	else if (lockCamera == 8){
+			p.set(posX3D[7],posY3D[7],0);
+		}
+
+	else if (lockCamera == 9){
+			p.set(posX3D[8],posY3D[8],0);
+		}
 
 	camera.ref = p;
 
