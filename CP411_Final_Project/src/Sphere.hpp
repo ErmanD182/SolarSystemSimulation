@@ -22,6 +22,7 @@ public:
 	Sphere();
 	~Sphere();
 	void draw();
+	void drawField3D();
 };
 
 #endif
