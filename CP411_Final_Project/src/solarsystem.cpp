@@ -14,6 +14,7 @@ extern GLuint saturnTexture, uranusTexture, neptuneTexture, plutoTexture, astero
 extern GLint view, orbits, gravFields, winWidth, winHeight, lockCamera;
 extern Camera camera;
 extern GLint oldView, spawn;
+extern GLfloat speed;
 GLfloat rx,ry,rz;
 Sphere *sun3D = new Sphere(), *mercury3D = new Sphere(), *venus3D = new Sphere(), *earth3D = new Sphere();
 Sphere *mars3D = new Sphere(), *jupitor3D = new Sphere(), *saturn3D = new Sphere(), *uranus3D = new Sphere();
@@ -172,92 +173,92 @@ void update(int) {
 		else if(view==0){//DRAW 2D
 
 		//Mercury
-		angle[0] = angle[0] + 0.013;
+		angle[0] = angle[0] + 0.013*speed;
 		posX[0] = SUNX + mercury->radiusOrb*cos(angle[0]);
 		posY[0] = SUNY + mercury->radiusOrb*sin(angle[0]);
 
 		//Venus
-		angle[1] = angle[1] + 0.009;
+		angle[1] = angle[1] + 0.009*speed;
 		posX[1] = (SUNX + 4) + venus->radiusOrb*cos(angle[1]);
 		posY[1] = (SUNY + 2) + venus->radiusOrb*sin(angle[1]);
 
 		//Earth
-		angle[2] = angle[2] + 0.008;
+		angle[2] = angle[2] + 0.008*speed;
 		posX[2] = (SUNX - 6) + earth->radiusOrb*cos(angle[2]);
 		posY[2] = (SUNY + 3) + earth->radiusOrb*sin(angle[2]);
 
 		//Mars
-		angle[3] = angle[3] + 0.005;
+		angle[3] = angle[3] + 0.005*speed;
 		posX[3] = (SUNX - 4) + mars->radiusOrb*cos(angle[3]);
 		posY[3] = (SUNY + 2) + mars->radiusOrb*sin(angle[3]);
 
 		//Jupitor
-		angle[4] = angle[4] + 0.0023;
+		angle[4] = angle[4] + 0.0023*speed;
 		posX[4] = (SUNX) + jupitor->radiusOrb*cos(angle[4]);
 		posY[4] = (SUNY) + jupitor->radiusOrb*sin(angle[4]);
 
 		//Saturn
-		angle[5] = angle[5] + 0.002;
+		angle[5] = angle[5] + 0.002*speed;
 		posX[5] = (SUNX + 3) + saturn->radiusOrb*cos(angle[5]);
 		posY[5] = (SUNY + 2) + saturn->radiusOrb*sin(angle[5]);
 
 		//Uranus
-		angle[6] = angle[6] + 0.0018;
+		angle[6] = angle[6] + 0.0018*speed;
 		posX[6] = (SUNX - 2) + uranus->radiusOrb*cos(angle[6]);
 		posY[6] = (SUNY + 1) + uranus->radiusOrb*sin(angle[6]);
 
 		//Uranus
-		angle[7] = angle[7] + 0.0016;
+		angle[7] = angle[7] + 0.0016*speed;
 		posX[7] = (SUNX - 4) + neptune->radiusOrb*cos(angle[7]);
 		posY[7] = (SUNY + 2) + neptune->radiusOrb*sin(angle[7]);
 
 		//Pluto
-		angle[8] = angle[8] + 0.0012;
+		angle[8] = angle[8] + 0.0012*speed;
 		posX[8] = (SUNX + 13) + pluto->radiusOrb*cos(angle[8]);
 		posY[8] = (SUNY + 5) + pluto->radiusOrb*sin(angle[8]);
 		}else if(view == 1){
 			//Mercury
-			angle3D[0] = angle3D[0] + 0.013;
+			angle3D[0] = angle3D[0] + 0.013*speed;
 			posX3D[0] = 2*cos(angle3D[0]);
 			posY3D[0] = 2*sin(angle3D[0]);
 
 			//Venus
-			angle3D[1] = angle3D[1] + 0.009;
+			angle3D[1] = angle3D[1] + 0.009*speed;
 			posX3D[1] = 4*cos(angle3D[1]);
 			posY3D[1] = 4*sin(angle3D[1]);
 
 			//Earth
-			angle3D[2] = angle3D[2] + 0.008;
+			angle3D[2] = angle3D[2] + 0.008*speed;
 			posX3D[2] = 7*cos(angle3D[2]);
 			posY3D[2] = 7*sin(angle3D[2]);
 
 			//Mars
-			angle3D[3] = angle3D[3] + 0.005;
+			angle3D[3] = angle3D[3] + 0.005*speed;
 			posX3D[3] = 11*cos(angle3D[3]);
 			posY3D[3] = 11*sin(angle3D[3]);
 
 			//Jupitor
-			angle3D[4] = angle3D[4] + 0.0023;
+			angle3D[4] = angle3D[4] + 0.0023*speed;
 			posX3D[4] = 18*cos(angle3D[4]);
 			posY3D[4] = 18*sin(angle3D[4]);
 
 			//Saturn
-			angle3D[5] = angle3D[5] + 0.002;
+			angle3D[5] = angle3D[5] + 0.002*speed;
 			posX3D[5] = 22*cos(angle3D[5]);
 			posY3D[5] = 22*sin(angle3D[5]);
 
 			//Uranus
-			angle3D[6] = angle3D[6] + 0.0018;
+			angle3D[6] = angle3D[6] + 0.0018*speed;
 			posX3D[6] = 28*cos(angle3D[6]);
 			posY3D[6] = 28*sin(angle3D[6]);
 
 			//Neptune
-			angle3D[7] = angle3D[7] + 0.0016;
+			angle3D[7] = angle3D[7] + 0.0016*speed;
 			posX3D[7] = 34*cos(angle3D[7]);
 			posY3D[7] = 34*sin(angle3D[7]);
 
 			//Pluto
-			angle3D[8] = angle3D[8] + 0.0012;
+			angle3D[8] = angle3D[8] + 0.0012*speed;
 			posX3D[8] = 40*cos(angle3D[8]);
 			posY3D[8] = 40*sin(angle3D[8]);
 
