@@ -8,11 +8,13 @@
 #include"menu.hpp"
 extern GLint view, option, cameraSelect, orbits, gravFields, lockCamera;
 GLint oldView;
+GLfloat speed = 1.0;
 
 void mainMenu(GLint option) {
 	view = 0;
     switch (option) {
     case 1:{
+    	speed = 1;
     	view = 3;
     }
         break;
@@ -28,10 +30,16 @@ void viewSwitchSubMenu(GLint transOption){
 
 	 //2D
 	 if (option == 1){
+		 if(view != 0){
+			 speed = 1;
+		 }
 		 view = 0;
 	 }
 	 //3D
 	 else if (option == 2){
+		 if(view == 1){
+			 speed = 1;
+		 }
 		 view = 1;
 	 }
 	 //Pause
@@ -124,6 +132,19 @@ void modelSubMenu(GLint transOption){
 			gravFields = 0;
 		}
 	}
+	//SANIC SPEED
+	else if(option == 3){
+		if(speed < 3){
+			speed = speed + 0.25;
+		}
+
+	}
+
+	else if(option == 4){
+		if(speed >0.25){
+			speed = speed - 0.25;
+		}
+	}
 }
 
 
@@ -163,6 +184,8 @@ void Menu(){
 	GLint model_SubMenu = glutCreateMenu(modelSubMenu);
 	glutAddMenuEntry("Orbits (On/Off)", 1);
 	glutAddMenuEntry("Gravitational Fields (On/Off)",2);
+	glutAddMenuEntry("Increase animation speed",3);
+	glutAddMenuEntry("Decrease animation speed",4);
 
 	glutCreateMenu(mainMenu);
 	glutAddMenuEntry(" Restart Animation", 1);
