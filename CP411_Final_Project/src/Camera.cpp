@@ -11,10 +11,10 @@ Camera::Camera() {
 }
 
 void Camera::setDefaultCamera(void) { // make default camera
-	eye.set(10, 5.0, 10.0);
+	eye.set(5.0, 10.0, 10.0);
 	ref.set(0, 0, 0);
 	viewup.set(0, 0, 1);
-	aspect = 1.5, viewAngle = 70.0, nearDist = 1.0, farDist = 500.0;
+	aspect = 1.5, viewAngle = 70.0, nearDist = 1.0, farDist = 40.0;
 	setViewNorm();
 }
 
