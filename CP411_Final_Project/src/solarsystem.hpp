@@ -15,6 +15,7 @@
 #include <stdio.h>
 #include <math.h>
 #include"Sphere.hpp"
+#include"Camera.hpp"
 
 
 
@@ -22,6 +23,7 @@ void draw2D(void);
 void draw3D(void);
 void update(int);
 void animate(void);
+void lockCam(void);
 
 
 

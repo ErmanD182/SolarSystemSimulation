@@ -6,7 +6,7 @@
  */
 
 #include"menu.hpp"
-extern GLint view, option, cameraSelect, orbits, gravFields;
+extern GLint view, option, cameraSelect, orbits, gravFields, lockCamera;
 GLint oldView;
 
 void mainMenu(GLint option) {
@@ -55,14 +55,56 @@ void cameraSubMenu(GLint transOption){
 
 	glutPostRedisplay();
 }
-void asteroidSubMenu(GLint transOption){
-	switch(option){
 
+void lockCamSubMenu(GLint transOption){
+	option = transOption;
 
-
-
+	if (option == 1){
+		lockCamera = 0;
 	}
 
+	else if (option == 2){
+		lockCamera = 1;
+	}
+
+	else if (option == 3){
+		lockCamera = 2;
+	}
+
+	else if (option == 4){
+		lockCamera = 3;
+	}
+
+	else if (option == 5){
+		lockCamera = 4;
+	}
+
+	else if (option == 6){
+		lockCamera = 5;
+	}
+
+	else if (option == 7){
+		lockCamera = 6;
+	}
+
+	else if (option == 8){
+		lockCamera = 7;
+	}
+
+	else if (option == 9){
+		lockCamera = 8;
+	}
+
+	else if (option == 10){
+		lockCamera = 9;
+	}
+
+	glutPostRedisplay();
+}
+
+void asteroidSubMenu(GLint transOption){
+
+	glutPostRedisplay();
 }
 
 void modelSubMenu(GLint transOption){
@@ -89,6 +131,18 @@ void modelSubMenu(GLint transOption){
 
 
 void Menu(){
+	GLint lockCam_SubMenu = glutCreateMenu(lockCamSubMenu);
+	glutAddMenuEntry(" Sun ", 1);
+	glutAddMenuEntry(" Mercury ", 2);
+	glutAddMenuEntry(" Venus ", 3);
+	glutAddMenuEntry(" Earth ", 4);
+	glutAddMenuEntry(" Mars ", 5);
+	glutAddMenuEntry(" Jupitor ", 6);
+	glutAddMenuEntry(" Saturn ", 7);
+	glutAddMenuEntry(" Uranus ", 8);
+	glutAddMenuEntry(" Neptune ", 9);
+	glutAddMenuEntry(" Pluto ", 10);
+
 	GLint viewSwitch_SubMenu = glutCreateMenu(viewSwitchSubMenu);
 	glutAddMenuEntry("2D View", 1);
 	glutAddMenuEntry("3D View", 2);
@@ -101,6 +155,7 @@ void Menu(){
 	glutAddMenuEntry("Translate x ", 4);
 	glutAddMenuEntry("Translate y ", 5);
 	glutAddMenuEntry("Translate z", 6);
+	glutAddSubMenu("Lock Camera to Planet",lockCam_SubMenu);
 
 	GLint asteroid_SubMenu = glutCreateMenu(asteroidSubMenu);
 	glutAddMenuEntry("Spawn Asteroid", 1);

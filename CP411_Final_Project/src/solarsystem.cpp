@@ -11,10 +11,11 @@ float posX[9], posY[9], angle[9], posX3D[9], posY3D[9], angle3D[9];
 const int SUNX = 600, SUNY = 400;
 extern GLuint sunTexture, mercuryTexture, venusTexture, earthTexture, marsTexture,jupitorTexture;
 extern GLuint saturnTexture, uranusTexture, neptuneTexture, plutoTexture;
-extern GLint view, orbits, gravFields, winWidth, winHeight;
+extern GLint view, orbits, gravFields, winWidth, winHeight, lockCamera;
+extern Camera camera;
 GLfloat rx,ry,rz;
-Sphere *sun3D = new Sphere();
-Sphere *mercury3D = new Sphere();
+Sphere *sun3D = new Sphere(), *mercury3D = new Sphere(), *venus3D = new Sphere(), *earth3D = new Sphere();
+Sphere *mars3D = new Sphere();
 
 
 void draw2D(void){
@@ -86,10 +87,26 @@ sun3D->radius = 2;
 
 mercury3D->textureID = mercuryTexture;
 mercury3D->radius = 0.5;
-drawOrbit(0,0,4);
 
 
+venus3D->textureID = venusTexture;
+venus3D->radius = 0.6;
 
+earth3D->textureID = earthTexture;
+earth3D->radius = 0.9;
+
+mars3D->textureID = marsTexture;
+mars3D->radius = 0.58;
+
+
+if (orbits == 0){
+	drawOrbit(0,0,4);
+	drawOrbit(0,0,8);
+	drawOrbit(0,0,14);
+	drawOrbit(0,0,22);
+}
+
+lockCam();
 animate();
 }
 
@@ -155,8 +172,20 @@ void update(int) {
 			posX3D[0] = 2*cos(angle3D[0]);
 			posY3D[0] = 2*sin(angle3D[0]);
 
+			//Venus
+			angle3D[1] = angle3D[1] + 0.009;
+			posX3D[1] = 4*cos(angle3D[1]);
+			posY3D[1] = 4*sin(angle3D[1]);
 
+			//Earth
+			angle3D[2] = angle3D[2] + 0.008;
+			posX3D[2] = 7*cos(angle3D[2]);
+			posY3D[2] = 7*sin(angle3D[2]);
 
+			//Mars
+			angle3D[3] = angle3D[3] + 0.005;
+			posX3D[3] = 11*cos(angle3D[3]);
+			posY3D[3] = 11*sin(angle3D[3]);
 		}
     glutPostRedisplay();
     glutTimerFunc(25, update, 0);
@@ -243,12 +272,11 @@ void animate(void){
 		//glEnable(GL_COLOR_MATERIAL);
 		//glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
 		//glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-
 		glColor3f(225,225,225);
+
 		glPushMatrix();
 		glTranslatef(posX3D[0], posY3D[0], 0);
 		glTranslatef(posX3D[0], posY3D[0], 0);
-
 		rx = mercury3D->getMC().mat[0][1];
 		ry = mercury3D->getMC().mat[1][1];
 		rz =mercury3D->getMC().mat[2][1];
@@ -256,10 +284,67 @@ void animate(void){
 		mercury3D->draw();
 		glPopMatrix();
 
+		glPushMatrix();
+		glTranslatef(posX3D[1], posY3D[1], 0);
+		glTranslatef(posX3D[1], posY3D[1], 0);
+		rx = venus3D->getMC().mat[0][1];
+		ry = venus3D->getMC().mat[1][1];
+		rz =venus3D->getMC().mat[2][1];
+		venus3D->rotateMC(rx,ry,rz,2);
+		venus3D->draw();
+		glPopMatrix();
+
+		glPushMatrix();
+		glTranslatef(posX3D[2], posY3D[2], 0);
+		glTranslatef(posX3D[2], posY3D[2], 0);
+		rx = earth3D->getMC().mat[0][1];
+		ry = earth3D->getMC().mat[1][1];
+		rz =earth3D->getMC().mat[2][1];
+		earth3D->rotateMC(rx,ry,rz,2);
+		earth3D->draw();
+		glPopMatrix();
+
+		glPushMatrix();
+		glTranslatef(posX3D[3], posY3D[3], 0);
+		glTranslatef(posX3D[3], posY3D[3], 0);
+		rx = mars3D->getMC().mat[0][1];
+		ry = mars3D->getMC().mat[1][1];
+		rz =mars3D->getMC().mat[2][1];
+		mars3D->rotateMC(rx,ry,rz,2);
+		mars3D->draw();
+		glPopMatrix();
+
 
 		sun3D->draw();
 	}
 
 	glutSwapBuffers();
+}
+
+void lockCam(void){
+	Point p;
+	if (lockCamera == 0){
+		p.set(0,0,0);
+		//camera.viewAngle = 70;
+	}
+	else if (lockCamera == 1){
+		p.set(posX3D[0],posY3D[0],0);
+		//camera.viewAngle = 30;
+	}
+
+	else if (lockCamera == 2){
+		p.set(posX3D[1],posY3D[1],0);
+	}
+
+	else if (lockCamera == 3){
+		p.set(posX3D[2],posY3D[2],0);
+	}
+
+	else if (lockCamera == 4){
+		p.set(posX3D[3],posY3D[3],0);
+	}
+
+	camera.ref = p;
+
 }
 

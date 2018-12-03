@@ -25,7 +25,7 @@ GLuint saturnTexture,uranusTexture, neptuneTexture, plutoTexture;
 
 GLint move = 0;
 GLint xbegin = 0, ybegin = 0;
-GLint view = 0, option = 0, cameraSelect = 0, orbits = 0, gravFields = 0;
+GLint view = 0, option = 0, cameraSelect = 0, orbits = 0, gravFields = 0, lockCamera = 0;
 
 GLint theta;
 Camera camera;
@@ -95,7 +95,7 @@ void mouseMotion(GLint x, GLint y) {
 			}
 			//Translate y
 			else if (option == 5){
-				theta = (ybegin - y < 0) ? 1 : -1;
+				theta = (xbegin - x < 0) ? 1 : -1;
 				//camera.farDist = 15;
 				camera.translate(0,theta,0);
 			}
