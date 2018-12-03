@@ -20,6 +20,8 @@ Sphere *sun3D = new Sphere(), *mercury3D = new Sphere(), *venus3D = new Sphere()
 Sphere *mars3D = new Sphere(), *jupitor3D = new Sphere(), *saturn3D = new Sphere(), *uranus3D = new Sphere();
 Sphere *neptune3D = new Sphere(), *pluto3D = new Sphere();
 Sphere *asteroid = new Sphere();
+Sphere *mercuryField = new Sphere(),*venusField = new Sphere(),*earthField = new Sphere(),*marsField = new Sphere();
+Sphere *jupitorField = new Sphere(), *saturnField = new Sphere(),*uranusField = new Sphere(),*neptuneField = new Sphere(), *plutoField = new Sphere();
 
 void spawnAsteroid(void){
 
@@ -134,6 +136,15 @@ pluto3D->radius = 0.3;
 asteroid->textureID = asteroidTexture;
 asteroid->radius = 0.5;
 
+mercuryField->radius = 2.5*mercury3D->radius;
+venusField->radius = 2.5*venus3D->radius;
+earthField->radius = 2.5*earth3D->radius;
+marsField->radius = 2.5*mars3D->radius;
+jupitorField->radius = 2.5*jupitor3D->radius;
+saturnField->radius = 2.5*saturn3D->radius;
+uranusField->radius = 2.5*uranus3D->radius;
+neptuneField->radius = 2.5*neptune3D->radius;
+plutoField->radius = 2.5*pluto3D->radius;
 
 
 if (orbits == 0){
@@ -465,6 +476,62 @@ void animate(void){
 
 
 		sun3D->draw();
+		if(gravFields == 0){
+			glPushMatrix();
+			glTranslatef(posX3D[0], posY3D[0], 0);
+			glTranslatef(posX3D[0], posY3D[0], 0);
+			mercuryField->drawField3D();
+			glPopMatrix();
+
+			glPushMatrix();
+			glTranslatef(posX3D[1], posY3D[1], 0);
+			glTranslatef(posX3D[1], posY3D[1], 0);
+			venusField->drawField3D();
+			glPopMatrix();
+
+			glPushMatrix();
+			glTranslatef(posX3D[2], posY3D[2], 0);
+			glTranslatef(posX3D[2], posY3D[2], 0);
+			earthField->drawField3D();
+			glPopMatrix();
+
+			glPushMatrix();
+			glTranslatef(posX3D[3], posY3D[3], 0);
+			glTranslatef(posX3D[3], posY3D[3], 0);
+			marsField->drawField3D();
+			glPopMatrix();
+
+			glPushMatrix();
+			glTranslatef(posX3D[4], posY3D[4], 0);
+			glTranslatef(posX3D[4], posY3D[4], 0);
+			jupitorField->drawField3D();
+			glPopMatrix();
+
+			glPushMatrix();
+			glTranslatef(posX3D[5], posY3D[5], 0);
+			glTranslatef(posX3D[5], posY3D[5], 0);
+			saturnField->drawField3D();
+			glPopMatrix();
+
+			glPushMatrix();
+			glTranslatef(posX3D[6], posY3D[6], 0);
+			glTranslatef(posX3D[6], posY3D[6], 0);
+			uranusField->drawField3D();
+			glPopMatrix();
+
+			glPushMatrix();
+			glTranslatef(posX3D[7], posY3D[7], 0);
+			glTranslatef(posX3D[7], posY3D[7], 0);
+			neptuneField->drawField3D();
+			glPopMatrix();
+
+			glPushMatrix();
+			glTranslatef(posX3D[8], posY3D[8], 0);
+			glTranslatef(posX3D[8], posY3D[8], 0);
+			plutoField->drawField3D();
+			glPopMatrix();
+
+		}
 	}
 
 	glutSwapBuffers();

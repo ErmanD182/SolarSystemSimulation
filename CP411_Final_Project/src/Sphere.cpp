@@ -45,3 +45,9 @@ void Sphere::draw() {
 
 }
 
+
+void Sphere::drawField3D(){
+	glColor4f(0.176,0.224,0.5,0.5);
+	gluSphere(this->quad,radius,50,50);
+	glColor4f(0.176,0.224,0.5,0.5);
+}
