@@ -21,8 +21,6 @@ Sphere *mars3D = new Sphere(), *jupitor3D = new Sphere(), *saturn3D = new Sphere
 Sphere *neptune3D = new Sphere(), *pluto3D = new Sphere();
 Sphere *asteroid = new Sphere();
 
-GLint choose;
-
 void spawnAsteroid(void){
 
 	glPushMatrix();
