@@ -29,6 +29,7 @@ typedef struct planet2D{
 	GLint radiusOrb;
 	GLint radiusGrav;
 	GLuint texture;
+	circle orbit;
 }planet2D;
 
 planet2D * new_planet(GLint x1, GLint y1, GLint radius, GLint radiusOrb, GLint radiusGrav, GLuint texture);
@@ -37,6 +38,10 @@ void setPixel(GLint x, GLint y);
 void circleMidpoint(GLint xc, GLint yc, GLfloat r);
 void circlePlotPoints(const GLint& xc, const GLint& yc, const GLint& x, const GLint& y);
 void drawPlanet(planet2D *p);
+void circleMidpointFill(GLint x1, GLint y1, GLint radius);
+void circlePlotPointsFill(GLint xc, GLint yc, GLint x, GLint y);
 void drawOrbit(GLint x, GLint y,GLint radius);
+void drawField(GLint x, GLint y, GLint radius);
+
 
 #endif /* CIRCLE_HPP_ */

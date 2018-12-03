@@ -6,12 +6,14 @@
  */
 
 #include"menu.hpp"
-extern GLint view, option;
+extern GLint view, option, cameraSelect, orbits, gravFields;
+GLint oldView;
 
 void mainMenu(GLint option) {
+	view = 0;
     switch (option) {
     case 1:{
-    	//restartAnimation();
+    	view = 3;
     }
         break;
     case 2:{
@@ -32,6 +34,16 @@ void viewSwitchSubMenu(GLint transOption){
 	 else if (option == 2){
 		 view = 1;
 	 }
+	 //Pause
+	 else if(option == 3){
+		 if(view != 2){
+			 oldView = view;
+			 view = 2;
+		 }else{
+			 view = oldView;
+		 }
+
+	 }
 
 	 glutPostRedisplay();
 }
@@ -39,6 +51,7 @@ void viewSwitchSubMenu(GLint transOption){
 
 void cameraSubMenu(GLint transOption){
 	option = transOption;
+	cameraSelect = 1;
 
 	glutPostRedisplay();
 }
@@ -52,6 +65,25 @@ void asteroidSubMenu(GLint transOption){
 
 }
 
+void modelSubMenu(GLint transOption){
+	option = transOption;
+	//Turn on/off orbits. 0 for on, 1 for off
+	if(option == 1){
+		if(orbits == 0){
+			orbits = 1;
+		}else{
+			orbits = 0;
+		}
+	//Turn on/off gravitational fields
+	}else if(option == 2){
+		if(gravFields == 0){
+			gravFields = 1;
+		}else{
+			gravFields = 0;
+		}
+	}
+}
+
 
 
 
@@ -60,6 +92,7 @@ void Menu(){
 	GLint viewSwitch_SubMenu = glutCreateMenu(viewSwitchSubMenu);
 	glutAddMenuEntry("2D View", 1);
 	glutAddMenuEntry("3D View", 2);
+	glutAddMenuEntry("Pause Animation/Resume Animation",3);
 
 	GLint camera_SubMenu = glutCreateMenu(cameraSubMenu);
 	glutAddMenuEntry("Rotate x ", 1);
@@ -72,12 +105,16 @@ void Menu(){
 	GLint asteroid_SubMenu = glutCreateMenu(asteroidSubMenu);
 	glutAddMenuEntry("Spawn Asteroid", 1);
 
+	GLint model_SubMenu = glutCreateMenu(modelSubMenu);
+	glutAddMenuEntry("Orbits (On/Off)", 1);
+	glutAddMenuEntry("Gravitational Fields (On/Off)",2);
 
 	glutCreateMenu(mainMenu);
 	glutAddMenuEntry(" Restart Animation", 1);
 	glutAddSubMenu(" View Switch",viewSwitch_SubMenu);
 	glutAddSubMenu(" Camera",camera_SubMenu);
 	glutAddSubMenu(" Asteroid Options",asteroid_SubMenu);
+	glutAddSubMenu(" Model Options",model_SubMenu);
 	glutAddMenuEntry(" Quit", 2);
 
 

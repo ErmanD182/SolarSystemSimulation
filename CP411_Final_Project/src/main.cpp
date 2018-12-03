@@ -15,7 +15,7 @@
 #include <GL/glut.h>
 #include <GL/gl.h>
 #include"menu.hpp"
-
+#include"Camera.hpp"
 #include <math.h>
 #include "solarsystem.hpp"
 
@@ -25,15 +25,22 @@ GLuint saturnTexture,uranusTexture, neptuneTexture, plutoTexture;
 
 GLint move = 0;
 GLint xbegin = 0, ybegin = 0;
-GLint view = 0, option = 0;
+GLint view = 0, option = 0, cameraSelect = 0, orbits = 0, gravFields = 0;
 
 GLint theta;
+Camera camera;
 
 void init(void) {
 	glClearColor(0.0, 0.0, 0.0, 1.0);
 	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
 	gluOrtho2D(0.0, winWidth, winHeight, 0.0);
 	glColor3f(1.0, 0.0, 0.0);
+	glEnable(GL_LINE_SMOOTH);
+	glHint(GL_LINE_SMOOTH_HINT, GL_NICEST);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glShadeModel(GL_SMOOTH);
 	sunTexture = loadBMP_custom("sun.bmp");
 	mercuryTexture = loadBMP_custom("mercury.bmp");
 	venusTexture = loadBMP_custom("venus.bmp");
@@ -44,6 +51,7 @@ void init(void) {
 	uranusTexture = loadBMP_custom("uranus.bmp");
 	neptuneTexture = loadBMP_custom("neptune.bmp");
 	plutoTexture = loadBMP_custom("pluto.bmp");
+	camera.setDefaultCamera();
 	glFlush();
 }
 
@@ -54,16 +62,65 @@ if (button == GLUT_LEFT_BUTTON){
 		move = 1;
 		xbegin = x;
 	}
+
+	else if (action == GLUT_UP) {
+		move = 0;
+	}
 }
 
 }
 void mouseMotion(GLint x, GLint y) {
-	theta = (xbegin - x > 0) ? 1 : -1;
+	if (move == 1){
+		if (view == 1 && cameraSelect == 1){
+			if (option == 1){
+				theta = (xbegin - x < 0) ? 1 : -1;
+				camera.rotate(1,0,0,theta);
+			}
+
+			else if (option == 2){
+				theta = (xbegin - x < 0) ? 1 : -1;
+				camera.rotate(0,1,0,theta);
+			}
+
+			else if (option == 3){
+				theta = (xbegin - x < 0) ? 1 : -1;
+				camera.rotate(0,0,1,theta);
+			}
+
+			//Translate x
+			else if (option == 4){
+				theta = (xbegin - x < 0) ? 1 : -1;
+				//camera.farDist = 15;
+				camera.translate(theta,0,0);
+			}
+			//Translate y
+			else if (option == 5){
+				theta = (ybegin - y < 0) ? 1 : -1;
+				//camera.farDist = 15;
+				camera.translate(0,theta,0);
+			}
+			//Translate z
+			else if (option == 6){
+				theta = (xbegin - x < 0) ? 1 : -1;
+				//camera.farDist = 15;
+				camera.translate(0,0,theta);
+			}
+		}
+
+
+
+	}
 }
 
 void display(void) {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	draw();
+	if (view == 0){
+		draw2D();
+	}
+	else if (view == 1){
+		camera.setProjectionMatrix();
+		draw3D();
+	}
 	glFlush();
 	glutSwapBuffers();
 }

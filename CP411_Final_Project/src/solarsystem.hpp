@@ -14,10 +14,12 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
+#include"Sphere.hpp"
 
 
 
-void draw(void);
+void draw2D(void);
+void draw3D(void);
 void update(int);
 void animate(void);
 
