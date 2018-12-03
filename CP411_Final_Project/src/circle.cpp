@@ -59,9 +59,9 @@ void drawOrbit(GLint x, GLint y, GLint radius){
 }
 
 void drawField(GLint x, GLint y, GLint radius){
-	glColor3f(0.176,0.224,0.5);
+	glColor4f(0.176,0.224,0.5,0.5);
 	circleMidpointFill(x,y,radius);
-	glColor3f(0.176,0.224,0.5);
+	glColor4f(0.176,0.224,0.5,0.5);
 }
 
 void circleMidpointFill(GLint x1, GLint y1, GLint radius){

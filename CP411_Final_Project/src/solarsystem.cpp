@@ -15,8 +15,8 @@ extern GLint view, orbits, gravFields, winWidth, winHeight, lockCamera;
 extern Camera camera;
 GLfloat rx,ry,rz;
 Sphere *sun3D = new Sphere(), *mercury3D = new Sphere(), *venus3D = new Sphere(), *earth3D = new Sphere();
-Sphere *mars3D = new Sphere();
-
+Sphere *mars3D = new Sphere(), *jupitor3D = new Sphere(), *saturn3D = new Sphere(), *uranus3D = new Sphere();
+Sphere *neptune3D = new Sphere(), *pluto3D = new Sphere();
 
 void draw2D(void){
 	glClear(GL_COLOR_BUFFER_BIT);
@@ -98,12 +98,33 @@ earth3D->radius = 0.9;
 mars3D->textureID = marsTexture;
 mars3D->radius = 0.58;
 
+jupitor3D->textureID = jupitorTexture;
+jupitor3D->radius = 1.5;
+
+saturn3D->textureID = saturnTexture;
+saturn3D->radius = 1.3;
+
+uranus3D->textureID = uranusTexture;
+uranus3D->radius = 1.2;
+
+neptune3D->textureID = neptuneTexture;
+neptune3D->radius = 1.3;
+
+pluto3D->textureID = plutoTexture;
+pluto3D->radius = 0.3;
+
 
 if (orbits == 0){
 	drawOrbit(0,0,4);
 	drawOrbit(0,0,8);
 	drawOrbit(0,0,14);
 	drawOrbit(0,0,22);
+	drawOrbit(0,0,36);
+	drawOrbit(0,0,44);
+
+	drawOrbit(0,0,56);
+	drawOrbit(0,0,68);
+	drawOrbit(0,0,80);
 }
 
 lockCam();
@@ -186,6 +207,31 @@ void update(int) {
 			angle3D[3] = angle3D[3] + 0.005;
 			posX3D[3] = 11*cos(angle3D[3]);
 			posY3D[3] = 11*sin(angle3D[3]);
+
+			//Jupitor
+			angle3D[4] = angle3D[4] + 0.0023;
+			posX3D[4] = 18*cos(angle3D[4]);
+			posY3D[4] = 18*sin(angle3D[4]);
+
+			//Saturn
+			angle3D[5] = angle3D[5] + 0.002;
+			posX3D[5] = 22*cos(angle3D[5]);
+			posY3D[5] = 22*sin(angle3D[5]);
+
+			//Uranus
+			angle3D[6] = angle3D[6] + 0.0018;
+			posX3D[6] = 28*cos(angle3D[6]);
+			posY3D[6] = 28*sin(angle3D[6]);
+
+			//Neptune
+			angle3D[7] = angle3D[7] + 0.0016;
+			posX3D[7] = 34*cos(angle3D[7]);
+			posY3D[7] = 34*sin(angle3D[7]);
+
+			//Pluto
+			angle3D[8] = angle3D[8] + 0.0012;
+			posX3D[8] = 40*cos(angle3D[8]);
+			posY3D[8] = 40*sin(angle3D[8]);
 		}
     glutPostRedisplay();
     glutTimerFunc(25, update, 0);
@@ -314,6 +360,57 @@ void animate(void){
 		mars3D->draw();
 		glPopMatrix();
 
+		glPushMatrix();
+		glTranslatef(posX3D[4], posY3D[4], 0);
+		glTranslatef(posX3D[4], posY3D[4], 0);
+		rx = jupitor3D->getMC().mat[0][1];
+		ry = jupitor3D->getMC().mat[1][1];
+		rz =jupitor3D->getMC().mat[2][1];
+		jupitor3D->rotateMC(rx,ry,rz,2);
+		jupitor3D->draw();
+		glPopMatrix();
+
+		glPushMatrix();
+		glTranslatef(posX3D[5], posY3D[5], 0);
+		glTranslatef(posX3D[5], posY3D[5], 0);
+		rx = saturn3D->getMC().mat[0][1];
+		ry = saturn3D->getMC().mat[1][1];
+		rz =saturn3D->getMC().mat[2][1];
+		saturn3D->rotateMC(rx,ry,rz,2);
+		saturn3D->draw();
+		glPopMatrix();
+
+		glPushMatrix();
+		glTranslatef(posX3D[6], posY3D[6], 0);
+		glTranslatef(posX3D[6], posY3D[6], 0);
+		rx = uranus3D->getMC().mat[0][1];
+		ry = uranus3D->getMC().mat[1][1];
+		rz =uranus3D->getMC().mat[2][1];
+		uranus3D->rotateMC(rx,ry,rz,2);
+		uranus3D->draw();
+		glPopMatrix();
+
+		glPushMatrix();
+		glTranslatef(posX3D[7], posY3D[7], 0);
+		glTranslatef(posX3D[7], posY3D[7], 0);
+		rx = neptune3D->getMC().mat[0][1];
+		ry = neptune3D->getMC().mat[1][1];
+		rz =neptune3D->getMC().mat[2][1];
+		neptune3D->rotateMC(rx,ry,rz,2);
+		neptune3D->draw();
+		glPopMatrix();
+
+		glPushMatrix();
+		glTranslatef(posX3D[8], posY3D[8], 0);
+		glTranslatef(posX3D[8], posY3D[8], 0);
+		rx = pluto3D->getMC().mat[0][1];
+		ry = pluto3D->getMC().mat[1][1];
+		rz =pluto3D->getMC().mat[2][1];
+		pluto3D->rotateMC(rx,ry,rz,2);
+		pluto3D->draw();
+		glPopMatrix();
+
+
 
 		sun3D->draw();
 	}
@@ -325,11 +422,11 @@ void lockCam(void){
 	Point p;
 	if (lockCamera == 0){
 		p.set(0,0,0);
-		//camera.viewAngle = 70;
+		camera.viewAngle = 70;
 	}
 	else if (lockCamera == 1){
 		p.set(posX3D[0],posY3D[0],0);
-		//camera.viewAngle = 30;
+		camera.viewAngle = 30;
 	}
 
 	else if (lockCamera == 2){
