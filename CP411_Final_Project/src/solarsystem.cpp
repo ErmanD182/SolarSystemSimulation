@@ -22,6 +22,9 @@ Sphere *neptune3D = new Sphere(), *pluto3D = new Sphere();
 Sphere *asteroid = new Sphere();
 Sphere *mercuryField = new Sphere(),*venusField = new Sphere(),*earthField = new Sphere(),*marsField = new Sphere();
 Sphere *jupitorField = new Sphere(), *saturnField = new Sphere(),*uranusField = new Sphere(),*neptuneField = new Sphere(), *plutoField = new Sphere();
+Sphere within[9], withinP[9];
+float with;
+
 
 void spawnAsteroid(void){
 
@@ -229,6 +232,109 @@ void update(int) {
 		posX[8] = (SUNX + 13) + pluto->radiusOrb*cos(angle[8]);
 		posY[8] = (SUNY + 5) + pluto->radiusOrb*sin(angle[8]);
 		}else if(view == 1){
+			with = pow((asteroidX+0.5),2) + pow((asteroidY+0.5),2);
+			if(with <= pow(sun3D->radius,2)){
+				asteroidX = -60;
+			}else{
+				for(int i = 0;i<9;i++){
+					with = pow((asteroidX+0.5)-posX[i],2) + pow((asteroidY+0.5) - posY[i],2);
+					if(i==0 && with <= pow(mercuryField->radius,2)){
+						if(with<=pow(mercury3D->radius,2)){
+							asteroidX = -60;
+						}else{
+							if(asteroidY < posY[i]){
+								asteroidY = asteroidY +0.7;
+							}else{
+								asteroidY = asteroidY -0.7;
+							}
+						}
+					}else if(i==1 && with <= pow(venusField->radius,2)){
+						if(with<=pow(venus3D->radius,2)){
+							asteroidX = -60;
+						}else{
+							if(asteroidY < posY[i]){
+								asteroidY = asteroidY +0.7;
+							}else{
+								asteroidY = asteroidY -0.7;
+							}
+						}
+					}else if(i==2 && with <= pow(earthField->radius,2)){
+						if(with<=pow(earth3D->radius,2)){
+							asteroidX = -60;
+						}else{
+							if(asteroidY < posY[i]){
+								asteroidY = asteroidY +0.7;
+							}else{
+								asteroidY = asteroidY -0.7;
+							}
+						}
+					}else if(i==3 && with <= pow(marsField->radius,2)){
+						if(with<=pow(mars3D->radius,2)){
+							asteroidX = -60;
+						}else{
+							if(asteroidY < posY[i]){
+								asteroidY = asteroidY +0.7;
+							}else{
+								asteroidY = asteroidY -0.7;
+							}
+						}
+					}else if(i==4 && with <= pow(jupitorField->radius,2)){
+						if(with<=pow(jupitor3D->radius,2)){
+							asteroidX = -60;
+						}else{
+							if(asteroidY < posY[i]){
+								asteroidY = asteroidY +0.7;
+							}else{
+								asteroidY = asteroidY -0.7;
+							}
+						}
+					}else if(i==5 && with <= pow(saturnField->radius,2)){
+						if(with<=pow(saturn3D->radius,2)){
+							asteroidX = -60;
+						}else{
+							if(asteroidY < posY[i]){
+								asteroidY = asteroidY +0.7;
+							}else{
+								asteroidY = asteroidY -0.7;
+							}
+						}
+					}else if(i==6 && with <= pow(uranusField->radius,2)){
+						if(with<=pow(uranus3D->radius,2)){
+							asteroidX = -60;
+						}else{
+							if(asteroidY < posY[i]){
+								asteroidY = asteroidY +0.7;
+							}else{
+								asteroidY = asteroidY -0.7;
+							}
+						}
+					}else if(i==7 && with <= pow(neptuneField->radius,2)){
+						if(with<=pow(neptune3D->radius,2)){
+							asteroidX = -60;
+						}else{
+							if(asteroidY < posY[i]){
+								asteroidY = asteroidY +0.7;
+							}else{
+								asteroidY = asteroidY -0.7;
+							}
+						}
+					}else if(i==8 && with <= pow(plutoField->radius,2)){
+						if(with<=pow(pluto3D->radius,2)){
+							asteroidX = -60;
+						}else{
+							if(asteroidY < posY[i]){
+								asteroidY = asteroidY +0.7;
+							}else{
+								asteroidY = asteroidY -0.7;
+							}
+						}
+					}
+
+				}
+			}
+
+
+
 			//Mercury
 			angle3D[0] = angle3D[0] + 0.013*speed;
 			posX3D[0] = 2*cos(angle3D[0]);
@@ -275,6 +381,7 @@ void update(int) {
 			posY3D[8] = 40*sin(angle3D[8]);
 
 
+
 			if (spawn == 1){
 				if (asteroidX == 70){
 					random = random/100;
@@ -284,12 +391,17 @@ void update(int) {
 
 			}
 
+
+
+
 			if (asteroidX <= -60.0){
 				spawn = 0;
 				asteroidX = 70.0;
 				asteroidY = 0.0;
 				random = rand() % 21 + (-10);
 			}
+
+
 
 		}
     glutPostRedisplay();
