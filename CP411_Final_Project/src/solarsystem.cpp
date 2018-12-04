@@ -309,95 +309,95 @@ void update(int) {
 				asteroidX = -60;
 			}else{
 				for(int i = 0;i<9;i++){
-					with = pow((asteroidX+0.5)-posX[i],2) + pow((asteroidY+0.5) - posY[i],2);
+					with = pow((asteroidX)-posX3D[i],2) + pow((asteroidY) - posY3D[i],2);
 					if(i==0 && with <= pow(mercuryField->radius,2)){
 						if(with<=pow(mercury3D->radius,2)){
 							asteroidX = -60;
 						}else{
-							if(asteroidY < posY[i]){
-								asteroidY = asteroidY +0.7;
+							if(asteroidY < posY3D[i]){
+								random = random +0.005;
 							}else{
-								asteroidY = asteroidY -0.7;
+								random = random -0.005;
 							}
 						}
 					}else if(i==1 && with <= pow(venusField->radius,2)){
 						if(with<=pow(venus3D->radius,2)){
 							asteroidX = -60;
 						}else{
-							if(asteroidY < posY[i]){
-								asteroidY = asteroidY +0.7;
+							if(asteroidY < posY3D[i]){
+								random = random +0.005;
 							}else{
-								asteroidY = asteroidY -0.7;
+								random = random -0.005;
 							}
 						}
 					}else if(i==2 && with <= pow(earthField->radius,2)){
 						if(with<=pow(earth3D->radius,2)){
 							asteroidX = -60;
 						}else{
-							if(asteroidY < posY[i]){
-								asteroidY = asteroidY +0.7;
+							if(asteroidY < posY3D[i]){
+								random = random +0.005;
 							}else{
-								asteroidY = asteroidY -0.7;
+								random = random -0.005;
 							}
 						}
 					}else if(i==3 && with <= pow(marsField->radius,2)){
 						if(with<=pow(mars3D->radius,2)){
 							asteroidX = -60;
 						}else{
-							if(asteroidY < posY[i]){
-								asteroidY = asteroidY +0.7;
+							if(asteroidY < posY3D[i]){
+								random = random +0.005;
 							}else{
-								asteroidY = asteroidY -0.7;
+								random = random -0.005;
 							}
 						}
 					}else if(i==4 && with <= pow(jupitorField->radius,2)){
 						if(with<=pow(jupitor3D->radius,2)){
 							asteroidX = -60;
 						}else{
-							if(asteroidY < posY[i]){
-								asteroidY = asteroidY +0.7;
+							if(asteroidY < posY3D[i]){
+								random = random +0.005;
 							}else{
-								asteroidY = asteroidY -0.7;
+								random = random -0.005;
 							}
 						}
 					}else if(i==5 && with <= pow(saturnField->radius,2)){
 						if(with<=pow(saturn3D->radius,2)){
 							asteroidX = -60;
 						}else{
-							if(asteroidY < posY[i]){
-								asteroidY = asteroidY +0.7;
+							if(asteroidY < posY3D[i]){
+								random = random +0.005;
 							}else{
-								asteroidY = asteroidY -0.7;
+								random = random -0.005;
 							}
 						}
 					}else if(i==6 && with <= pow(uranusField->radius,2)){
 						if(with<=pow(uranus3D->radius,2)){
 							asteroidX = -60;
 						}else{
-							if(asteroidY < posY[i]){
-								asteroidY = asteroidY +0.7;
+							if(asteroidY < posY3D[i]){
+								random = random +0.005;
 							}else{
-								asteroidY = asteroidY -0.7;
+								random = random -0.005;
 							}
 						}
 					}else if(i==7 && with <= pow(neptuneField->radius,2)){
 						if(with<=pow(neptune3D->radius,2)){
 							asteroidX = -60;
 						}else{
-							if(asteroidY < posY[i]){
-								asteroidY = asteroidY +0.7;
+							if(asteroidY < posY3D[i]){
+								random = random +0.005;
 							}else{
-								asteroidY = asteroidY -0.7;
+								random = random -0.005;
 							}
 						}
 					}else if(i==8 && with <= pow(plutoField->radius,2)){
 						if(with<=pow(pluto3D->radius,2)){
 							asteroidX = -60;
 						}else{
-							if(asteroidY < posY[i]){
-								asteroidY = asteroidY +0.7;
+							if(asteroidY < posY3D[i]){
+								random = random +0.005;
 							}else{
-								asteroidY = asteroidY -0.7;
+								random = random -0.005;
 							}
 						}
 					}
