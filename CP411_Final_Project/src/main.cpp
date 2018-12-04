@@ -34,7 +34,7 @@ void init(void) {
 	glClearColor(0.0, 0.0, 0.0, 1.0);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluOrtho2D(0.0, winWidth, winHeight, 0.0);
+	gluOrtho2D(-winWidth / 0.9 + 1200, winWidth / 0.9, -winHeight / 0.9 + 550, winHeight / 0.9 + 250);
 	glColor3f(1.0, 0.0, 0.0);
 	glEnable(GL_LINE_SMOOTH);
 	glHint(GL_LINE_SMOOTH_HINT, GL_NICEST);

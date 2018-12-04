@@ -192,7 +192,7 @@ void Menu(){
 	glutCreateMenu(mainMenu);
 	glutAddMenuEntry(" Restart Animation", 1);
 	glutAddSubMenu(" View Switch",viewSwitch_SubMenu);
-	glutAddSubMenu(" Camera",camera_SubMenu);
+	glutAddSubMenu(" 3D Camera",camera_SubMenu);
 	glutAddSubMenu(" Asteroid Options",asteroid_SubMenu);
 	glutAddSubMenu(" Model Options",model_SubMenu);
 	glutAddMenuEntry(" Quit", 2);

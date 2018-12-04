@@ -6,16 +6,17 @@
  */
 #include"solarsystem.hpp"
 
-planet2D *sun, *mercury, *venus, *earth, *mars, *jupitor, *saturn, *uranus, *neptune, *pluto;
+planet2D *sun, *mercury, *venus, *earth, *mars, *jupitor, *saturn, *uranus, *neptune, *pluto, *asteroid2D;
 float posX[9], posY[9], angle[9], posX3D[9], posY3D[9], angle3D[9], asteroidX = 70.0, asteroidY = 0.0, random = rand() % 21 + (-10);
 const int SUNX = 600, SUNY = 400;
+float asteroidX2D = 600, asteroidY2D = 1100, random2D = rand() % (6 + 1 - 2) + 2, random2DX =  rand() % 7 + (-3);
 extern GLuint sunTexture, mercuryTexture, venusTexture, earthTexture, marsTexture,jupitorTexture;
 extern GLuint saturnTexture, uranusTexture, neptuneTexture, plutoTexture, asteroidTexture;
 extern GLint view, orbits, gravFields, winWidth, winHeight, lockCamera;
 extern Camera camera;
 extern GLint oldView, spawn;
 extern GLfloat speed;
-GLfloat rx,ry,rz;
+GLfloat rx,ry,rz, check, check2;
 Sphere *sun3D = new Sphere(), *mercury3D = new Sphere(), *venus3D = new Sphere(), *earth3D = new Sphere();
 Sphere *mars3D = new Sphere(), *jupitor3D = new Sphere(), *saturn3D = new Sphere(), *uranus3D = new Sphere();
 Sphere *neptune3D = new Sphere(), *pluto3D = new Sphere();
@@ -27,7 +28,15 @@ float with;
 
 
 void spawnAsteroid(void){
+	if (view == 0){
+		glPushMatrix();
+		glTranslatef(asteroidX2D, asteroidY2D, 0);
+		drawPlanet(asteroid2D);
+		glPopMatrix();
+	}
 
+
+	else if (view == 1){
 	glPushMatrix();
 	glTranslatef(asteroidX, asteroidY, 0);
 	glTranslatef(asteroidX, asteroidY, 0);
@@ -37,6 +46,7 @@ void spawnAsteroid(void){
 	asteroid->rotateMC(rx,ry,rz,1);
 	asteroid->draw();
 	glPopMatrix();
+	}
 
 }
 
@@ -45,7 +55,7 @@ void draw2D(void){
 	glClear(GL_COLOR_BUFFER_BIT);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluOrtho2D(0.0, winWidth, winHeight, 0.0);
+	gluOrtho2D(-winWidth / 0.9 + 1200, winWidth / 0.9, -winHeight / 0.9 + 550, winHeight / 0.9 + 250);
 	glClearColor(0.0, 0.0, 0.0, 1.0);
 
 		//Sun
@@ -53,40 +63,43 @@ void draw2D(void){
 		drawPlanet(sun);
 
 		//Mercury
-		mercury = new_planet(0,0,15,100,20,mercuryTexture);
+		mercury = new_planet(0,0,15,100,30,mercuryTexture);
 
 
 		//Venus
-		venus = new_planet(0,0,20,150,30,venusTexture);
+		venus = new_planet(0,0,20,180,33,venusTexture);
 
 
 		//Earth
-		earth = new_planet(0,0,21,210,30,earthTexture);
+		earth = new_planet(0,0,21,250,38,earthTexture);
 
 
 		//Mars
-		mars = new_planet(0,0,16,250,30,marsTexture);
+		mars = new_planet(0,0,16,320,32,marsTexture);
 
 
 		//Jupitor
-		jupitor = new_planet(0,0,30,340,40,jupitorTexture);
+		jupitor = new_planet(0,0,30,400,46,jupitorTexture);
 
 
 		//Saturn
-		saturn = new_planet(0,0,25,420,30,saturnTexture);
+		saturn = new_planet(0,0,25,480,36,saturnTexture);
 
 
 		//Uranus
-		uranus = new_planet(0,0,22,500,30,uranusTexture);
+		uranus = new_planet(0,0,22,550,34,uranusTexture);
 
 
 		//Neptune
-		neptune = new_planet(0,0,21.5,570,30,neptuneTexture);
+		neptune = new_planet(0,0,21.5,620,31,neptuneTexture);
 
 
 		//Pluto
-		pluto = new_planet(0,0,12,630,20,plutoTexture);
+		pluto = new_planet(0,0,12,680,22,plutoTexture);
 
+
+		//Asteroid
+		asteroid2D = new_planet(0,0,7.5,0,0,asteroidTexture);
 
 		if(orbits == 0){
 			drawOrbit(SUNX,SUNY,mercury->radiusOrb);
@@ -231,6 +244,65 @@ void update(int) {
 		angle[8] = angle[8] + 0.0012*speed;
 		posX[8] = (SUNX + 13) + pluto->radiusOrb*cos(angle[8]);
 		posY[8] = (SUNY + 5) + pluto->radiusOrb*sin(angle[8]);
+
+		if (spawn == 1){
+			asteroidX2D = asteroidX2D + random2DX;
+			asteroidY2D = asteroidY2D - random2D;
+
+		}
+
+		check2 = pow(abs(asteroidX2D - SUNX), 2) + pow(abs(asteroidY2D - SUNY), 2);
+		if (check2 <= pow(sun->c.radius,2)){
+			asteroidX2D = 1300;
+		}
+
+		for (int i = 0; i < 9; i++){
+			check = pow(abs(asteroidX2D - posX[i]), 2) + pow(abs(asteroidY2D - posY[i]), 2);
+			if (i == 0 && check <= pow(mercury->c.radius,2)){
+				asteroidX2D = 1300;
+			}
+			else if (i == 1 && check <= pow(venus->c.radius,2)){
+				asteroidX2D = 1300;
+			}
+
+			else if (i == 2 && check <= pow(earth->c.radius,2)){
+				asteroidX2D = 1300;
+			}
+
+			else if (i == 3 && check <= pow(mars->c.radius,2)){
+				asteroidX2D = 1300;
+			}
+
+			else if (i == 4 && check <= pow(jupitor->c.radius,2)){
+				asteroidX2D = 1300;
+			}
+
+			else if (i == 5 && check <= pow(saturn->c.radius,2)){
+				asteroidX2D = 1300;
+			}
+
+			else if (i == 6 && check <= pow(uranus->c.radius,2)){
+				asteroidX2D = 1300;
+			}
+
+			else if (i == 7 && check <= pow(neptune->c.radius,2)){
+				asteroidX2D = 1300;
+			}
+
+			else if (i == 8 && check <= pow(pluto->c.radius,2)){
+				asteroidX2D = 1300;
+			}
+		}
+
+		if (asteroidY2D <= -250 || asteroidX2D >= 1300 || asteroidX2D < -80){
+			spawn = 0;
+			asteroidX2D = 600;
+			asteroidY2D = 1100;
+			random2D = rand() % (6 + 1 - 2) + 2;
+		    random2DX =  rand() % 7 + (-3);
+		}
+
+
 		}else if(view == 1){
 			with = pow((asteroidX+0.5),2) + pow((asteroidY+0.5),2);
 			if(with <= pow(sun3D->radius,2)){
@@ -475,6 +547,11 @@ void animate(void){
 	glTranslatef(posX[8], posY[8], 0);
 	drawPlanet(pluto);
 	glPopMatrix();
+
+	if (spawn == 1){
+		spawnAsteroid();
+	}
+
 	}
 
 	else if (view == 1){
