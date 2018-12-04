@@ -1,12 +1,13 @@
 /**
  *	File Matrix.cpp
- *	Description: implementation of Matrix class
+ **	//Erman Dinsel and Stuart isley
+	//160364040		   160757220
  *
  */
 
 #include "Matrix.hpp"
 
-// mat <- identity matrix
+
 Matrix::Matrix() {
 	reset();
 }
@@ -22,7 +23,7 @@ void Matrix::reset() {
 	}
 }
 
-// multiplication  mat <- m * mat
+
 void Matrix::matrixPreMultiply(Matrix* m) {
 	GLfloat temp[4][4], sum=0;
 	for (int i = 0; i < 4; i++) {
@@ -42,7 +43,7 @@ void Matrix::matrixPreMultiply(Matrix* m) {
 }
 
 
-// transpose  mat <- mat'
+
 void Matrix::transpose() {
 	GLfloat temp[4][4];
 	for (int i = 0; i< 4; i++){
@@ -58,7 +59,7 @@ void Matrix::transpose() {
 
 }
 
-// normalize mat
+
 void Matrix::normalize() {
 	GLfloat norm = sqrt(mat[0][0]*mat[0][0] + mat[1][0]*mat[1][0]+mat[2][0]*mat[2][0]);
 	mat[0][0] = mat[0][0]/norm;
@@ -80,7 +81,7 @@ void Matrix::normalize() {
 	mat[3][3] = 1;
 }
 
-// v  <- mat * v
+
 void Matrix::multiplyVector(GLfloat *v) {
 	GLfloat sum, temp[4];
 		for (int i = 0; i < 4; i++) {
@@ -96,7 +97,7 @@ void Matrix::multiplyVector(GLfloat *v) {
 
 }
 
-// mat <- rotation matrix (rx, ry, rz, angle)
+
 void Matrix::rotateMatrix(GLfloat rx, GLfloat ry, GLfloat rz, GLfloat angle) {
 	GLfloat radianAngle = angle * 3.1415926/180;
 	GLfloat axisVectLength = sqrt (rx* rx + ry*ry + rz*rz);

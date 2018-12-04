@@ -1,3 +1,6 @@
+//Erman Dinsel and Stuart isley
+//160364040		   160757220
+
 #include "Sphere.hpp"
 
 Sphere::Sphere() {
@@ -14,16 +17,7 @@ Sphere::~Sphere() {
 }
 
 void Sphere::draw() {
-
-	if (mode == MODE_WIRE) {
-		glPushMatrix();
-		this->ctmMultiply();
-		glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
-		gluSphere(this->quad, radius, splices, stacks);
-		glPopMatrix();
-	}
-
-	else if (mode == MODE_TEXTURE) {
+		if (mode == MODE_TEXTURE) {
 		quad = gluNewQuadric();
 		gluQuadricTexture(this->quad, GL_TRUE);
 		gluQuadricOrientation(this->quad, GLU_OUTSIDE);

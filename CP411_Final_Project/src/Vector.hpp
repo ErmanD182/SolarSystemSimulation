@@ -1,3 +1,6 @@
+//Erman Dinsel and Stuart isley
+//160364040		   160757220
+
 #ifndef CVECTOR_H
 #define CVECTOR_H
 
@@ -6,18 +9,18 @@
 
 class Vector {
  public:
-	GLfloat x,y,z; 			//the coordinates
+	GLfloat x,y,z;
 	Vector();
 	Vector(GLfloat dx, GLfloat dy, GLfloat dz);
 	void set(GLfloat dx, GLfloat yy, GLfloat dz);
 	void set(Vector v);
 	void setDiff(Point a, Point b);
-	void flip(); 			// reverse this vector
-	void normalize();		//adjust this vector to unit length
+	void flip();
+	void normalize();
 	Vector diff(Point a, Point b);
-	Vector cross(Vector b); //return this cross b
-	GLfloat dot(Vector b); 	//return this dotted with b
-	void build4tuple(GLfloat v[]); //v[0]=x,v[1]=y,v[2]=z,v[3]=0 for homogeneous
+	Vector cross(Vector b);
+	GLfloat dot(Vector b);
+	void build4tuple(GLfloat v[]);
 	void printVector();
 };
 

@@ -1,3 +1,6 @@
+//Erman Dinsel and Stuart isley
+//160364040		   160757220
+
 #ifndef SPHERE_H
 #define SPHERE_H
 

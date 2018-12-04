@@ -2,8 +2,10 @@
  * main.cpp
  *
  *  Created on: Nov 26, 2018
-=======
- *      Author: Erman Dinsel and Stuart Isley
+
+ *      //Erman Dinsel and Stuart isley
+		//160364040		   160757220
+
  */
 
 #include "circle.hpp"
@@ -88,19 +90,16 @@ void mouseMotion(GLint x, GLint y) {
 			//Translate x
 			else if (option == 4){
 				theta = (xbegin - x < 0) ? 1 : -1;
-				//camera.farDist = 15;
 				camera.translate(theta,0,0);
 			}
 			//Translate y
 			else if (option == 5){
 				theta = (xbegin - x < 0) ? 1 : -1;
-				//camera.farDist = 15;
 				camera.translate(0,theta,0);
 			}
 			//Translate z
 			else if (option == 6){
 				theta = (xbegin - x < 0) ? 1 : -1;
-				//camera.farDist = 15;
 				camera.translate(0,0,theta);
 			}
 		}
@@ -135,7 +134,7 @@ void winReshapeFcn(GLint newWidth, GLint newHeight) {
 
 int main(int argc, char** argv) {
 
-	setvbuf(stdout, NULL, _IONBF, 0); //for printing on Eclipse console
+	setvbuf(stdout, NULL, _IONBF, 0);
 	setvbuf(stderr, NULL, _IONBF, 0);
 
 	glutInit(&argc, argv);
@@ -152,7 +151,7 @@ int main(int argc, char** argv) {
 	glutReshapeFunc(winReshapeFcn);
 	glutMouseFunc(mouseAction);
 	glutMotionFunc(mouseMotion);
-	glutAttachMenu(GLUT_RIGHT_BUTTON);//add right click menu
+	glutAttachMenu(GLUT_RIGHT_BUTTON);
 	glutMainLoop();
 
 	return 0;

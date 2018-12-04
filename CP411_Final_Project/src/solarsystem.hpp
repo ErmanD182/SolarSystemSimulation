@@ -2,7 +2,8 @@
  * solarsystem.hpp
  *
  *  Created on: Nov 27, 2018
- *      Author: stuua
+ *      //Erman Dinsel and Stuart isley
+		//160364040		   160757220
  */
 
 #ifndef SOLARSYSTEM_HPP_

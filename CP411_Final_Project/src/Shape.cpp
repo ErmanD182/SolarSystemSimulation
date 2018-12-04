@@ -1,3 +1,6 @@
+//Erman Dinsel and Stuart isley
+//160364040		   160757220
+
 #include "Shape.hpp"
 
 Shape::Shape() {
@@ -23,13 +26,8 @@ void Shape::translate(GLfloat tx, GLfloat ty, GLfloat tz) {
 }
 
 
-void Shape::scaleChange(GLfloat x) {
-	s += x;
-}
 
-/**
- * Shape::ctm_multiply() multiply this matrix to openGL current matrix
- */
+
 void Shape::ctmMultiply() {
 	mc.transpose();
 	glMultMatrixf(&mc.mat[0][0]);
