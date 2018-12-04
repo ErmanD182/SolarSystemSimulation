@@ -1,3 +1,5 @@
+//Erman Dinsel and Stuart isley
+//160364040		   160757220
 #include <stdio.h>
 #include "Point.hpp"
 

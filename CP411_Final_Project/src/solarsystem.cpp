@@ -2,7 +2,8 @@
  * solarsystem.cpp
  *
  *  Created on: Nov 27, 2018
- *      Author: stuua
+ *      //Erman Dinsel and Stuart isley
+		//160364040		   160757220
  */
 #include"solarsystem.hpp"
 
@@ -181,7 +182,6 @@ if (orbits == 0){
 
 lockCam();
 animate();
-//spawn = 0;
 }
 
 void update(int) {
@@ -255,7 +255,7 @@ void update(int) {
 		if (check2 <= pow(sun->c.radius,2)){
 			asteroidX2D = 1300;
 		}
-
+		//Check to see if asteroid is within planet in 2D
 		for (int i = 0; i < 9; i++){
 			check = pow(abs(asteroidX2D - posX[i]), 2) + pow(abs(asteroidY2D - posY[i]), 2);
 			if (i == 0 && check <= pow(mercury->c.radius,2)){
@@ -304,6 +304,8 @@ void update(int) {
 
 
 		}else if(view == 1){
+
+			//Checking To see if the asteroid is within the planets gravField or planet itself
 			with = pow((asteroidX+0.5),2) + pow((asteroidY+0.5),2);
 			if(with <= pow(sun3D->radius,2)){
 				asteroidX = -60;
@@ -562,6 +564,7 @@ void animate(void){
 		glEnable(GL_CULL_FACE);
 		glEnable(GL_NORMALIZE);
 
+//ADD LIGHTING FROM SUN LATER
 		//Enable material properties for lighting
 		//glEnable(GL_COLOR_MATERIAL);
 		//glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);

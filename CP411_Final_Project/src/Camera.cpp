@@ -1,9 +1,11 @@
+//Erman Dinsel and Stuart isley
+//160364040		   160757220
+
 #include <stdio.h>
 #include "Camera.hpp"
 #include "Matrix.hpp"
 
 
-bool DEBUG = false;
 
 Camera::Camera() {
 	setDefaultCamera();

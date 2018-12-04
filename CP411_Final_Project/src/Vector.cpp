@@ -1,3 +1,6 @@
+//Erman Dinsel and Stuart isley
+//160364040		   160757220
+
 #include "Vector.hpp"
 #include <math.h>
 #include <stdio.h>
@@ -30,7 +33,7 @@ void Vector::set(Vector v) {
 }
 
 
-Vector Vector::cross(Vector b) //return this cross b
+Vector Vector::cross(Vector b)
 {
 	Vector c(y*b.z - z*b.y, z*b.x - x*b.z, x*b.y - y*b.x);
 	return c;
@@ -58,9 +61,7 @@ void Vector::normalize(){
 }
 
 
-/* setDiff
- * set to difference a - b
- */
+
 void Vector::setDiff(Point a, Point b){
 	x = a.x - b.x;
 	y = a.y - b.y;

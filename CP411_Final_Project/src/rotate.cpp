@@ -2,7 +2,8 @@
  * rotate.cpp
  *
  *  Created on: Nov 28, 2018
- *      Author: erman
+ *      //Erman Dinsel and Stuart isley
+		//160364040		   160757220
  */
 #include"rotate.hpp"
 
@@ -20,9 +21,7 @@ void scaleChange(GLfloat x) {
 	s += x;
 }
 
-/**
- * Shape::ctm_multiply() multiply this matrix to openGL current matrix
- */
+
 void ctmMultiply() {
 	mc.transpose();
 	glMultMatrixf(&mc.mat[0][0]);

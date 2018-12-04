@@ -2,21 +2,22 @@
  * rotate.hpp
  *
  *  Created on: Nov 28, 2018
- *      Author: erman
+ *      //Erman Dinsel and Stuart isley
+		//160364040		   160757220
  */
 
 #ifndef ROTATE_HPP_
 #define ROTATE_HPP_
 
 #include "matrix.hpp"
-Matrix mc; // the Model coordinate system (X, Y, Z, 0) in WC, represent the position of the object in WC
-GLfloat s; // scale factor
+Matrix mc;
+GLfloat s;
 
-void ctmMultiply();    // function to do the CTM * MC
-void scaleChange(GLfloat x); // to change the scale factor
-void translate(GLfloat tx, GLfloat ty, GLfloat tz); //translate the MC origin
-void rotate(GLfloat rx, GLfloat ry, GLfloat rz, GLfloat angle);      // rotate object in WC
-void rotateOrigin(GLfloat rx, GLfloat ry, GLfloat rz, GLfloat angle);// just rotate the origin of object in WC
+void ctmMultiply();
+void scaleChange(GLfloat x);
+void translate(GLfloat tx, GLfloat ty, GLfloat tz);
+void rotate(GLfloat rx, GLfloat ry, GLfloat rz, GLfloat angle);
+void rotateOrigin(GLfloat rx, GLfloat ry, GLfloat rz, GLfloat angle);
 void rotateMC(GLfloat rx, GLfloat ry, GLfloat rz, GLfloat angle);
 
 

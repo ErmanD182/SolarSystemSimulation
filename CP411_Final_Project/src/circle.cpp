@@ -2,7 +2,8 @@
  * circle.cpp
  *
  *  Created on: Nov 27, 2018
- *      Author: erman and stuart
+ *      //Erman Dinsel and Stuart isley
+		//160364040		   160757220
  */
 
 #include"circle.hpp"
@@ -57,7 +58,7 @@ void drawOrbit(GLint x, GLint y, GLint radius){
 	circleMidpoint(x,y,radius);
 	glColor3f(0.176,0.224,0.5);
 }
-
+//Creates the transparent field
 void drawField(GLint x, GLint y, GLint radius){
 	glColor4f(0.176,0.224,0.5,0.5);
 	circleMidpointFill(x,y,radius);
@@ -131,7 +132,8 @@ void circleMidpoint(GLint xc, GLint yc, GLfloat r) {
 
 
 
-
+//Creating using information from an openGL tutorial for loading textures
+//onto all kinds of shapes from - http://www.opengl-tutorial.org/
 GLuint loadBMP_custom(const char * imagepath){//For 2D Objects
 
 	// Data read from the header of the BMP file
