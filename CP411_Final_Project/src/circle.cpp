@@ -22,14 +22,12 @@ planet2D * new_planet(GLint x1, GLint y1, GLint radius, GLint radiusOrb, GLint r
 
 void drawPlanet(planet2D *p)
 {
-    float angle, radian, x, y, xcos, ysin, tx, ty;       // values needed by drawCircleOutline
-   // drawOrbit(p->radiusOrb);
+    float angle, radian, x, y, xcos, ysin, tx, ty;
     glEnable(GL_TEXTURE_2D);
     glBindTexture(GL_TEXTURE_2D, p->texture);
     glColor3f(225,225,225);
     glBegin(GL_POLYGON);
 
-    //Drawing a cirlce with a texture algorithm
     for (angle=0.0; angle<360.0; angle+=2.0)
     {
     	radian = angle * (3.14/180.0f);
@@ -131,7 +129,8 @@ void circleMidpoint(GLint xc, GLint yc, GLfloat r) {
 
 
 
-
+//http://www.opengl-tutorial.org/beginners-tutorials/tutorial-5-a-textured-cube/
+//This code was used from this website to load our textures to be used with our objects
 GLuint loadBMP_custom(const char * imagepath){//For 2D Objects
 
 	// Data read from the header of the BMP file

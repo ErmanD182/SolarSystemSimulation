@@ -2,11 +2,8 @@
  * main.cpp
  *
  *  Created on: Nov 26, 2018
-<<<<<<< HEAD
- *      Author: erman is a stupid idoit...
 =======
  *      Author: Erman Dinsel and Stuart Isley
->>>>>>> branch 'master' of https://github.com/ErmanD182/SolarSystemSimulation.git
  */
 
 #include "circle.hpp"
